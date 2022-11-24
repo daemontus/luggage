@@ -1,0 +1,9 @@
+r = getOption("repos")
+r["CRAN"] = "http://cran.us.r-project.org"
+options(repos = r)
+
+# General packages for the jupyer labs R kernel.
+install.packages(c('repr','IRkernel','IRdisplay'))
+
+# Install kernel for everyone (not just root).
+IRkernel::installspec(user = FALSE)
