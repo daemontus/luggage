@@ -12,14 +12,18 @@ USER root
 WORKDIR ~
 
 # Create a workspace group where the workspace user should be placed.
+# But let the child docker images initialize the actual user.
 RUN groupadd -g 1000 workspace
+
+# Update apt cache, just to be safe.
+RUN apt-get update --yes
 
 # Install general quality of life utilities.
 RUN apt-get install --yes --no-install-recommends \
 	git \
 	wget \
 	curl \
-	htop \
+	htop
 
 #  Copy the initialization scripts.
 RUN mkdir -p /etc/my_init.d

@@ -1,0 +1,26 @@
+## Install the package from Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# Dorothea regulatory networks
+BiocManager::install("dorothea")
+
+library("dorothea")
+
+# Dependencies for scBoolSeq
+install.packages(c('bigmemory', 'diptest', 'dplyr', 'foreach', 'glue', 'magrittr', 'mclust', 'moments', 'tibble', 'tidyr', 'ggplot2', 'snow', 'doSNOW'))
+
+# Test that packages are installed
+library("bigmemory")
+library("diptest")
+library("dplyr")
+library("foreach")
+library("glue")
+library("magrittr")
+library("mclust")
+library("moments")
+library("tibble")
+library("tidyr")
+library("ggplot2")
+library("snow")
+library("doSNOW")
