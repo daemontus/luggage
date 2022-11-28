@@ -23,7 +23,8 @@ RUN apt-get install --yes --no-install-recommends \
 	git \
 	wget \
 	curl \
-	htop
+	htop \
+    nano
 
 #  Copy the initialization scripts.
 RUN mkdir -p /etc/my_init.d
