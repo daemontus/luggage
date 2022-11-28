@@ -9,7 +9,6 @@ CMD ["/sbin/my_init"]
 
 # Everything here applies to the root user's home.
 USER root
-WORKDIR ~
 
 # Create a workspace group where the workspace user should be placed.
 # But let the child docker images initialize the actual user.
