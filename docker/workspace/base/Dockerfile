@@ -23,7 +23,8 @@ RUN apt-get install --yes --no-install-recommends \
 	wget \
 	curl \
 	htop \
-    nano
+    nano \
+	screen
 
 #  Copy the initialization scripts.
 RUN mkdir -p /etc/my_init.d
