@@ -20,7 +20,8 @@ RUN apt-get install --yes --no-install-recommends \
 	z3 \
 	gringo \
 	libssl-dev \
-	uuid-dev
+	uuid-dev \
+	graphviz
 
 USER ${workspace_user}
 # Install stable Rust as local user (it should update path, but not in here, 
