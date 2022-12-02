@@ -57,6 +57,14 @@ COPY startup.sh /home/$WORKSPACE_USER/.startup.sh
 RUN chmod +x /home/$WORKSPACE_USER/.startup.sh
 RUN chown $WORKSPACE_USER:workspace /home/$WORKSPACE_USER/.startup.sh
 
+# Turns out, we should also move the ownership of directories that
+# we plan to bind our external data to to the workspace user.
+# On Unraid, something like this happens automatically, but its
+# not a default anywhere else.
+RUN mkdir -p /etc/my_init.d
+COPY 03_setup_mounts.sh  /etc/my_init.d/03_setup_mounts.sh
+RUN chmod +x /etc/my_init.d/03_setup_mounts.sh
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
