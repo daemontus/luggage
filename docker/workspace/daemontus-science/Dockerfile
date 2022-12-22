@@ -70,6 +70,10 @@ RUN chmod +x /etc/my_init.d/03_setup_mounts.sh
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+# To build the latest versions of AEON, we need `z3-sys`, and for that,
+# we need `libclang`. So here's `clang`.
+RUN apt-get install --yes --no-install-recommends clang
 # I keep this here as an extra step because it's probably going 
 # to change often.
-RUN pip3 install biodivine_aeon==0.2.0a0
+RUN pip3 install biodivine_aeon==0.2.0a4
