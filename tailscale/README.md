@@ -6,7 +6,7 @@ This folder contains everything that you need to install Tailscale natively on U
 
  1. Create a `/boot/config/tailscale` folder.
  2. Copy `install.sh`, `start.sh` and `update.sh` into `/boot/config/tailscale`.
- 3. Add the following to `/boot/config/go`:
+ 3. Add the following to the existing `/boot/config/go` script:
 
  ```
 # Start Tailscale on boot.
@@ -14,8 +14,8 @@ bash /boot/config/tailscale/install.sh
 bash /boot/config/tailscale/start.sh
  ```
  4. Run `bash /boot/config/tailscale/update.sh` to download the latest Tailscale version and start the daemon for the first time.
- 5. Login through `tailscale up`.
+ 5. Login normally through `tailscale up`.
  6. Restart Unraid and run `tailscale status` to verify that (a) Tailscale is now running and (b) you are still logged in.
- 7. [Optional: Key expiration] Go to your Tailscale console and disable key expiration for your Unraid machine.
- 8. [Optional: Automatic updates] Install *User Scripts* plugin. Then create a new script into which you copy the `update.sh` file, and set this script to run periodically (e.g. one a week). Alternatively, run `update.sh` manually when you want to update.
+ 7. [Optional: Key expiration] Go to your Tailscale console and disable key expiration for your Unraid machine. Otherwise you will lose access in three months and will need to login again.
+ 8. [Optional: Automatic updates] Install *User Scripts* Unraid plugin. Then create a new script into which you copy the contents of the `update.sh` file. Set this script to run periodically (e.g. one a week). Alternatively, run `update.sh` manually when you want to update.
 
