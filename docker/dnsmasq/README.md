@@ -37,6 +37,6 @@ address=/sub.domain.com/192.168.86.10
 ```
 
 Other notes:
- > In advanced container settings, you can set the container icon to the [logo.png](https://github.com/daemontus/luggage/raw/main/docker/dnsmasq/logo.png) from this repository. Just know that Unraid may have [problems](https://forums.unraid.net/topic/96765-cant-change-docker-container-icon/) propagating the change if you make it after the container is created.
- > If you plan to log all queries, clean up the log files regularly! Otherwise they will accumulate indefinitely.
- > Even if you don't want to log everything all the time, it might be a good idea to enable logging at first to verify that everything is working as expected.
+ - In advanced container settings, you can set the container icon to the [logo.png](https://github.com/daemontus/luggage/raw/main/docker/dnsmasq/logo.png) from this repository. Just know that Unraid may have [problems](https://forums.unraid.net/topic/96765-cant-change-docker-container-icon/) propagating the change if you make it after the container is created.
+ - If you plan to log all queries, clean up the log files regularly! Otherwise they will accumulate indefinitely.
+ - Even if you don't want to log everything all the time, it might be a good idea to enable logging at first to verify that everything is working as expected.
