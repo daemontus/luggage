@@ -1,0 +1,10 @@
+users:
+    daemontus:
+        password: PUT_DUMMY_HASH_HERE
+        displayname: User Name
+        email: user.name@email.com
+        groups:
+            - admins
+            - dev
+        disabled: false
+
