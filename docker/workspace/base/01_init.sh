@@ -16,10 +16,17 @@ if [ "$PRIVATE_KEY" != "" ]; then
 	echo "-----END OPENSSH PRIVATE KEY-----" >> /home/$WORKSPACE_USER/.ssh/workspace
 
 	# Add the key through ssh config
-	echo "IdentityFile ~/.ssh/workspace" >> /home/$WORKSPACE_USER/.ssh/config
+	# This code ensures that subsequent restarts of the container won't repeat the line again.
+	LINE="IdentityFile ~/.ssh/workspace"
+	FILE="/home/${WORKSPACE_USER}/.ssh/config"
+	touch $FILE
+	grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"	
 
 	# Auto-start ssh agent on user login
-	echo "eval \`ssh-agent -s\`" >> /home/$WORKSPACE_USER/.bashrc
+	LINE="eval \`ssh-agent -s\`"
+	FILE="/home/${WORKSPACE_USER}/.bashrc"
+	touch $FILE
+	grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"	
 
 	# Erase keys
 	export PRIVATE_KEY=""
