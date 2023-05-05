@@ -13,3 +13,10 @@ The container runs as root and is otherwise "as simple as possible" (e.g. just `
 
 In terminal, use `conda activate MTLRank` to activate the `MTLRank` environment. Also, note that due to the "minimal" setup, the
 default working directory in the terminal is not `/root/notebook`! You have to run `cd /root/notebook` before downloading new data.
+
+### Build and publish
+
+```
+docker build -t $USERNAME/software-mtlrank .
+docker push $USERNAME/software-mtlrank
+```

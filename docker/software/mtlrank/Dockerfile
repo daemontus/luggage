@@ -1,5 +1,5 @@
 # Our default conda environment
-FROM daemontus/base-conda:latest
+FROM daemontus/workspace-base-conda:latest
 
 RUN git clone --depth=1 --branch v1.0.0 https://github.com/alexQiSong/MTLRank.git
 
