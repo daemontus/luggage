@@ -18,8 +18,12 @@ RUN apt install --yes --no-install-recommends \
 	r-base \
 	r-base-dev
 
+# 	Install conda.
 WORKDIR /root
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.3.1-0-Linux-x86_64.sh -O miniconda.sh
 RUN chmod +x miniconda.sh
 RUN ./miniconda.sh -b -p $HOME/miniconda
 ENV PATH="${PATH}:/root/miniconda/bin"
+
+# 	As long as people use bash as their default shell, they should have conda available.
+RUN conda init bash
