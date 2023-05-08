@@ -22,8 +22,9 @@ RUN apt-get install --yes --no-install-recommends \
 	libssl-dev \
 	uuid-dev \
 	graphviz \
-	clang \
-	jq
+	jq \
+	libcurl4-gnutls-dev \
+	libxml2-dev
 
 USER ${workspace_user}
 # Install stable Rust as local user (it should update path, but not in here, 
