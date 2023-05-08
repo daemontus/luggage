@@ -12,3 +12,5 @@ COPY jupyter.service.sh /etc/service/jupyter/run
 COPY jupyter.config.py /etc/service/jupyter/config.py
 RUN chmod +x /etc/service/jupyter/run
 EXPOSE 8000
+
+RUN mkdir -p /root/notebook

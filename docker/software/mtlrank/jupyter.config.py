@@ -39,7 +39,6 @@ c.NotebookApp.token = ''
 ## The directory to use for notebooks and kernels.
 #  Default: ''
 c.NotebookApp.notebook_dir = '/root/notebook'
-c.NotebookApp.root_dir = '/root/notebook'
 
 ## Allow runnig as root user.
 #  Default: False
