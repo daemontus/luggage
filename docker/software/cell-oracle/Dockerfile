@@ -43,3 +43,16 @@ RUN mkdir -p /root/notebook
 #  (6)	Should validate that Cell Oracle is successfully installed.
 COPY check.py .
 RUN python3 check.py
+
+#  (7) Install BEDtools which are used in some pre-processing steps.
+RUN apt-get install bedtools
+
+#  (8)	Install R language. 
+# 		This is not required by Cell Oracle, but is used in some pre-processing steps.
+RUN apt install --yes --no-install-recommends \
+	r-base \
+	r-base-dev
+
+#  (9) Install R dependencies (including IRkernel for use with jupyter).
+COPY requirements.R.txt .
+RUN Rscript requirements.R.txt

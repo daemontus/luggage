@@ -1,0 +1,12 @@
+r = getOption("repos")
+r["CRAN"] = "http://cran.us.r-project.org"
+options(repos = r)
+
+# General packages for the jupyer labs R kernel.
+install.packages(c('repr','IRkernel','IRdisplay'))
+
+# Install kernel.
+IRkernel::installspec()
+
+# Other dependencies used in conjunction with Cell Oracle
+install.packages(c('cicero','monocle3'))
