@@ -13,66 +13,71 @@ RUN apt-get update --yes
 RUN apt-get install --yes --no-install-recommends \
 	texlive-full
 
-#  (2) 	Install build essentials (make, gcc, etc.). 
+#  (2) 	Install build essentials (make, gcc, clang, etc.). 
 RUN apt-get install --yes --no-install-recommends \
 	build-essential \
 	pkg-config \
 	cmake \
 	make \
-	gcc
+	gcc \
+	clang
 
-#  (3)	Install "scientific" packages (blas, lapac, and fortran).
+#  (3)  Install default version of Java.
+RUN apt-get install --yes --no-install-recommends \
+	default-jdk
+
+#  (4)	Install "scientific" packages (blas, lapac, and fortran).
 RUN apt-get install --yes --no-install-recommends \
 	liblapack-dev \
 	libopenblas-dev \
 	gfortran
 
-#  (4)	Install R language.
+#  (5)	Install R language.
 RUN apt install --yes --no-install-recommends \
 	r-base \
 	r-base-dev
 
-#  (5) 	Install Python language with pip package manager.
+#  (6) 	Install Python language with pip package manager.
 RUN apt-get install --yes --no-install-recommends \
 	python3 \
 	python3-pip \
 	python3-venv \
 	python3-dev
 
-#  (6) 	Install node.js and npm package manager.
+#  (7) 	Install node.js and npm package manager.
 RUN apt install --yes --no-install-recommends \
 	nodejs \
 	npm
 
-#  (7)	Install Python dependencies (including jupyter lab).
+#  (8)	Install Python dependencies (including jupyter lab).
 COPY requirements.python.txt .
 RUN pip3 install -r requirements.python.txt
 
-#  (8) Install R dependencies (mainly IRkernel - depedns on jupyter lab).
+#  (9) Install R dependencies (mainly IRkernel - depedns on jupyter lab).
 COPY requirements.R.txt .
 RUN Rscript requirements.R.txt
 
-#  (9) Install VSCode server.
+#  (10) Install VSCode server.
 ARG vscode_version=1.73.0
 RUN wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v${vscode_version}/openvscode-server-v${vscode_version}-linux-x64.tar.gz
 RUN tar -xzf openvscode-server-v${vscode_version}-linux-x64.tar.gz
 RUN mv openvscode-server-v${vscode_version}-linux-x64 /usr/local/vscode
 RUN chmod -R a+w /usr/local/vscode
 
-#  (10) Copy lab config and register jupyter lab as an always-on service.
+#  (11) Copy lab config and register jupyter lab as an always-on service.
 RUN mkdir /etc/service/jupyter
 COPY jupyter.service.sh /etc/service/jupyter/run
 COPY jupyter.config.py /etc/service/jupyter/config.py
 RUN chmod +x /etc/service/jupyter/run
 EXPOSE 8000
 
-#  (11) Register vscode as an always-on service.
+#  (12) Register vscode as an always-on service.
 RUN mkdir /etc/service/vscode
 COPY vscode.service.sh /etc/service/vscode/run
 RUN chmod +x /etc/service/vscode/run
 EXPOSE 8001
 
-#  (12) Add an init script that ensures VSCODE_DATA folders exist before vscode starts,
+#  (13) Add an init script that ensures VSCODE_DATA folders exist before vscode starts,
 # 		and that jupyter lab is configured properly.
 RUN mkdir -p /etc/my_init.d
 COPY 02_init_science.sh  /etc/my_init.d/02_init_science.sh
