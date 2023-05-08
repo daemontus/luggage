@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1
+
+# We inherit from an ubuntu image that is modified to support long-running services
+# consisting of multiple processes. To learn how to define a background services, 
+# consult https://github.com/phusion/baseimage-docker
+FROM daemontus/workspace-base:latest
+
+# Update apt cache, just to be safe.
+RUN apt-get update --yes
+
+#  (1) 	Some packages that we'll be installing are built from source, 
+# 		hence we need GCC to install them (also why we need python3-dev).
+RUN apt-get install --yes --no-install-recommends \
+	build-essential \
+	gcc
+
+#  (2) 	Install Python language with pip package manager.
+RUN apt-get install --yes --no-install-recommends \
+	python3 \
+	python3-pip \
+	python3-venv \
+	python3-dev
+
+WORKDIR /root
+
+#  (3)	Install Python dependencies (including jupyter notebook).
+COPY requirements.python.txt .
+# Some transitive dependency has a wrong requirements list, hence these two need to be installed
+# specifically *before* we try to install Cell Oracle.
+RUN pip3 install numpy cython
+RUN pip3 install -r requirements.python.txt
+
+#  (4)	Enable Jupyter notebook on port 8000.
+RUN mkdir /etc/service/jupyter
+COPY jupyter.service.sh /etc/service/jupyter/run
+COPY jupyter.config.py /etc/service/jupyter/config.py
+RUN chmod +x /etc/service/jupyter/run
+EXPOSE 8000
+
+#  (5)	Ensure notebook directory exists (if we are not attached to a volume).
+RUN mkdir -p /root/notebook
+
+#  (6)	Should validate that Cell Oracle is successfully installed.
+COPY check.py .
+RUN python3 check.py

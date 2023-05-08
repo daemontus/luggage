@@ -1,0 +1,2 @@
+notebook
+celloracle==0.12.1
