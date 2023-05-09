@@ -29,3 +29,5 @@ This readme assumes you have `certificate_create.sh` and `certificate_renew.sh` 
  - Now add the HTTPS end point: if you also want authentication through `authelia`, you can again use `sites/sw.mtlrank.conf` as a template. If you don't want authentication, simply remove all `authelia` related imports.
 
   > By default, our `authelia` container requires single-factor authentication for all endpoints and groups. If you want some other settings for your specific server, see the `authelia` image for instructions on how to change this.
+
+  > Note that the example `mtlrank` domain has a disabled file upload size limit because it is only used by verified users. If your domain provides a public service, you should seriously consider using a fixed limit, plus probably add some rate limiting settings. TODO: later, we will provide a better example of a "public" server configuration. 
