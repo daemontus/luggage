@@ -10,6 +10,7 @@ if [ "$VSCODE_DATA" != "" ]; then
 	chown $WORKSPACE_USER:workspace $VSCODE_DATA/user
 	chown $WORKSPACE_USER:workspace $VSCODE_DATA/extensions
 	chown $WORKSPACE_USER:workspace $VSCODE_DATA/server
+	chown $WORKSPACE_USER:workspace $VSCODE_DATA
 else
 	echo "VSCode data path not specified. Configuration will not persist."
 fi

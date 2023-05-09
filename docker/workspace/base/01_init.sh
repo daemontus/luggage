@@ -1,7 +1,23 @@
 #!/bin/sh
 
-# Create the workspace user if she does not exist.
-id -u $WORKSPACE_USER >/dev/null 2>&1 || useradd -u 1000 -g workspace -s /bin/bash -m $WORKSPACE_USER
+# If a workspace user is set, ensure she exists and that anything
+# that is already mounted in her home directory is actually accessible.
+if [ "$WORKSPACE_USER" != "" ]; then
+	# Create the workspace user if she does not exist.
+	id -u $WORKSPACE_USER >/dev/null 2>&1 || useradd -u 1000 -g workspace -s /bin/bash -m $WORKSPACE_USER
+
+	# In some cases, the user directory is owned by root, which makes
+	# some software freak out. This should prevent it.
+	chown $WORKSPACE_USER:workspace /home/$WORKSPACE_USER
+
+	# Furthermore, if we mount anything into the home directory, it is
+	# also owned by root. Hence we just transfer everything in the 
+	# home directory to the workspace user. Of course, if you have mounts
+	# in other places, you have to take care of them manually.
+	chown $WORKSPACE_USER:workspace /home/$WORKSPACE_USER/*
+else
+	echo "No workspace user set."
+fi
 
 # If an SSH key is provided, copy it to the user's .ssh folder
 # and then erase the key.
