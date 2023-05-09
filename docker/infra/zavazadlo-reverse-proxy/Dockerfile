@@ -11,3 +11,7 @@ COPY sites/sw.celloracle.conf /etc/nginx/sites/sw.celloracle.conf
 COPY sites/sw.stream.conf /etc/nginx/sites/sw.stream.conf
 COPY sites/ws.daemontus.code.conf /etc/nginx/sites/ws.daemontus.code.conf
 COPY sites/ws.daemontus.lab.conf /etc/nginx/sites/ws.daemontus.lab.conf
+COPY sites/ws.florekova.code.conf /etc/nginx/sites/ws.florekova.code.conf
+COPY sites/ws.florekova.lab.conf /etc/nginx/sites/ws.florekova.lab.conf
+COPY sites/ws.kuzlik.code.conf /etc/nginx/sites/ws.kuzlik.code.conf
+COPY sites/ws.kuzlik.lab.conf /etc/nginx/sites/ws.kuzlik.lab.conf
