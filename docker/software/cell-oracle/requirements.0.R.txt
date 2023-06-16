@@ -15,33 +15,3 @@ BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
 
 #apt-get install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libharfbuzz-dev libfribidi-dev libfontconfig1-dev libxml2-dev
 install.packages("devtools")
-
-BiocManager::install("batchelor")
-
-#apt-get install libudunits2-dev
-install.packages("units")
-
-#apt-get install libgdal-dev gdal-bin
-install.packages("sf")
-
-install.packages("spdep")
-
-#apt-get install libcairo2-dev
-install.packages("Cairo")
-install.packages("ggrastr")
-install.packages("lme4")
-devtools::install_github('cole-trapnell-lab/monocle3')
-
-library(monocle3)
-
-#cicero
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install(c("Gviz", "GenomicRanges", "rtracklayer"))
-
-install.packages("devtools")
-BiocManager::install("Rhtslib")
-BiocManager::install("Gviz")
-devtools::install_github("cole-trapnell-lab/cicero-release", ref = "monocle3")
-
-library(cicero)

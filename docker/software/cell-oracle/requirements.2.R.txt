@@ -1,0 +1,11 @@
+#cicero
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(c("Gviz", "GenomicRanges", "rtracklayer"))
+
+install.packages("devtools")
+BiocManager::install("Rhtslib")
+BiocManager::install("Gviz")
+devtools::install_github("cole-trapnell-lab/cicero-release", ref = "monocle3")
+
+library(cicero)

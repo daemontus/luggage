@@ -47,12 +47,56 @@ RUN python3 check.py
 #  (7) Install BEDtools which are used in some pre-processing steps.
 RUN apt-get install bedtools
 
+RUN apt-get update --yes
+RUN apt install -y --no-install-recommends software-properties-common dirmngr
+# Add the keys
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+
 #  (8)	Install R language. 
 # 		This is not required by Cell Oracle, but is used in some pre-processing steps.
 RUN apt install --yes --no-install-recommends \
 	r-base \
-	r-base-dev
+	r-base-dev \
+	r-base-core \
+	r-recommended
+
+RUN apt install --yes --no-install-recommends \
+	libfreetype6-dev \
+	libpng-dev \
+	libtiff5-dev \
+	libjpeg-dev \
+	libharfbuzz-dev \
+	libfribidi-dev \
+	libfontconfig1-dev \
+	libxml2-dev
+
+RUN apt install --yes --no-install-recommends \
+	libudunits2-dev
+
+RUN apt install --yes --no-install-recommends \
+	libgdal-dev \
+	gdal-bin
+
+RUN apt install --yes --no-install-recommends \
+	libcairo2-dev
+
+RUN apt install --yes --no-install-recommends \
+	cmake \
+	xorg \
+	xorg-dev
 
 #  (9) Install R dependencies (including IRkernel for use with jupyter).
-COPY requirements.R.txt .
-RUN Rscript requirements.R.txt
+#COPY requirements.R.txt .
+COPY requirements.0.R.txt .
+RUN Rscript requirements.0.R.txt
+
+COPY requirements.1.R.txt .
+RUN Rscript requirements.1.R.txt
+
+COPY requirements.2.R.txt .
+RUN Rscript requirements.2.R.txt
+
+COPY requirements.3.R.txt .
+RUN Rscript requirements.3.R.txt

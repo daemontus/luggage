@@ -1,0 +1,17 @@
+BiocManager::install("batchelor")
+
+#apt-get install libudunits2-dev
+install.packages("units")
+
+#apt-get install libgdal-dev gdal-bin
+install.packages("sf")
+
+install.packages("spdep")
+
+#apt-get install libcairo2-dev
+install.packages("Cairo")
+install.packages("ggrastr")
+install.packages("lme4")
+devtools::install_github('cole-trapnell-lab/monocle3')
+
+library(monocle3)
