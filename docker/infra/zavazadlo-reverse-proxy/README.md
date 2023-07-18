@@ -28,6 +28,8 @@ This readme assumes you have `certificate_create.sh` and `certificate_renew.sh` 
  - Run `certificate_create.sh YOUR_DOMAIN` on the server (this should create new certificates in `/mnt/user/appdata/letsencrypt/` which is mapped to `/etc/nginx/ssl` in the container).
  - Now add the HTTPS end point: if you also want authentication through `authelia`, you can again use `sites/sw.mtlrank.conf` as a template. If you don't want authentication, simply remove all `authelia` related imports.
 
+  > If the server is accessed from other domains, make sure to include the `cors.conf` snippet.
+
   > By default, our `authelia` container requires single-factor authentication for all endpoints and groups. If you want some other settings for your specific server, see the `authelia` image for instructions on how to change this.
 
   > Note that the example `mtlrank` domain has a disabled file upload size limit because it is only used by verified users. If your domain provides a public service, you should seriously consider using a fixed limit, plus probably add some rate limiting settings. 

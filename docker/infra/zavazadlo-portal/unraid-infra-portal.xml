@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>infra-portal</Name>
+  <Repository>daemontus/zavazadlo-portal:latest</Repository>
+  <Registry/>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview/>
+  <Category/>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png</Icon>
+  <ExtraParams>--memory=8g --memory-swap=8g</ExtraParams>
+  <PostArgs/>
+  <CPUset>0,1,4,5</CPUset>
+  <DateInstalled>1689712406</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Website" Target="80" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">10001</Config>
+</Container>
