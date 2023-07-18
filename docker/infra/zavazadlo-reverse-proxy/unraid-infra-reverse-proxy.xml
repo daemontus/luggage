@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>infra-reverse-proxy</Name>
+  <Repository>daemontus/zavazadlo-reverse-proxy:latest</Repository>
+  <Registry/>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>Reverse proxy routes all incoming outside traffic to the respective docker images. It also forwards relevant traffic to authelia for user authentication.</Overview>
+  <Category/>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png</Icon>
+  <ExtraParams>--memory=8g --memory-swap=8g</ExtraParams>
+  <PostArgs/>
+  <CPUset>0,1,4,5</CPUset>
+  <DateInstalled>1689193387</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Proxy" Target="80" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">8080</Config>
+  <Config Name="Proxy (HTTPS)" Target="443" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">4433</Config>
+  <Config Name="Host Path 1" Target="/var/www/certbot" Default="" Mode="ro" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/certbot/</Config>
+  <Config Name="Host Path 2" Target="/etc/nginx/ssl" Default="" Mode="ro" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/letsencrypt/</Config>
+</Container>

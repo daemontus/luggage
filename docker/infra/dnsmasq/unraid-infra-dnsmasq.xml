@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>infra-dnsmasq</Name>
+  <Repository>daemontus/dnsmasq:latest</Repository>
+  <Registry>https://hub.docker.com/repository/docker/daemontus/dnsmasq/general</Registry>
+  <Network>br0</Network>
+  <MyIP>192.168.86.2</MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>A local DNS server. It is mostly responsible for correct domain resolution on our local network. Instead of the IP in the global DNS tables (which is our router), it will serve the server address to anyone on the network directly.</Overview>
+  <Category/>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://github.com/daemontus/luggage/raw/main/docker/dnsmasq/logo.png</Icon>
+  <ExtraParams>--memory=8g --memory-swap=8g</ExtraParams>
+  <PostArgs/>
+  <CPUset>0,1,4,5</CPUset>
+  <DateInstalled>1689193439</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="DNS (TCP)" Target="" Default="53" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">53</Config>
+  <Config Name="DNS (UDP)" Target="" Default="53" Mode="udp" Description="" Type="Port" Display="always" Required="false" Mask="false">53</Config>
+  <Config Name="Configuration file" Target="/etc/dnsmasq.conf" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/dnsmasq/dns.conf</Config>
+  <Config Name="Log file:" Target="/var/log/dsnmasq.log" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/dnsmasq/dns.log</Config>
+</Container>
