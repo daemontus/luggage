@@ -446,6 +446,27 @@ storage:
     ## Path to the SQLite3 Database.
     path: /config/db.sqlite3
 
+identity_providers:
+  oidc:
+    hmac_secret: PUT_SECRET_HERE
+    issuer_private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      PUT_PRIVATE_KEY_HERE
+      -----END RSA PRIVATE KEY-----
+    clients:
+    - id: seafile
+      description: Seafile
+      secret: PUT_DIGEST_SECRET_HERE
+      public: false
+      authorization_policy: two_factor
+      redirect_uris:
+        - https://seafile.unsigned-short.com/oauth/callback/
+      scopes:
+        - openid
+        - profile
+        - email
+      userinfo_signing_algorithm: none
+
 ##
 ## Notification Provider
 ##
