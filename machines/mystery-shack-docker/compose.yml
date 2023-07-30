@@ -1,0 +1,23 @@
+services:
+  celloracle:
+    image: 'daemontus/software-cell-oracle:latest'
+    ports: 
+      - "10000:8888"
+    volumes:
+      - /nfs/ws-daemontus-hdd/software/celloracle:/root/notebook/remote
+      - /notebook/celloracle:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G
+  stream:
+    image: 'daemontus/software-stream:latest'
+    ports:
+      - "10001:8000"
+    volumes:
+      - /nfs/ws-daemontus-hdd/software/stream:/root/notebook/remote
+      - /notebook/stream:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G

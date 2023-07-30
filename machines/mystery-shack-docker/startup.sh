@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Global git config
-git config --global user.name "Samuel Pastva"
-git config --global user.email "sam.pastva@gmail.com"
+exec su -c 'git config --global user.name "Samuel Pastva"' daemontus
+exec su -c 'git config --global user.email "sam.pastva@gmail.com"' daemontus
 
 
 exec su -c 'cd ~ && /usr/local/vscode/bin/openvscode-server \
