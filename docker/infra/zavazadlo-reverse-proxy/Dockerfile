@@ -11,9 +11,14 @@ COPY sites/plex.conf /etc/nginx/sites/plex.conf
 COPY sites/portal.conf /etc/nginx/sites/portal.conf
 COPY sites/seafile.conf /etc/nginx/sites/seafile.conf
 COPY sites/download.conf /etc/nginx/sites/download.conf
+
 COPY sites/sw.mtlrank.conf /etc/nginx/sites/sw.mtlrank.conf
 COPY sites/sw.celloracle.conf /etc/nginx/sites/sw.celloracle.conf
 COPY sites/sw.stream.conf /etc/nginx/sites/sw.stream.conf
+
+COPY sites/ms.sw.stream.conf /etc/nginx/sites/ms.sw.stream.conf
+COPY sites/ms.sw.celloracle.conf /etc/nginx/sites/ms.sw.celloracle.conf
+
 COPY sites/ws.daemontus.code.conf /etc/nginx/sites/ws.daemontus.code.conf
 COPY sites/ws.daemontus.lab.conf /etc/nginx/sites/ws.daemontus.lab.conf
 COPY sites/ws.florekova.code.conf /etc/nginx/sites/ws.florekova.code.conf

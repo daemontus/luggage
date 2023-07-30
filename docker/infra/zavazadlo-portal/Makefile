@@ -1,9 +1,7 @@
 all: build push
 
-user := $(shell whoami)
-
 build: 
-	docker build -t "$(user)/zavazadlo-portal" .
+	docker build -t "daemontus/zavazadlo-portal" .
 
 push:
-	docker push "$(user)/zavazadlo-portal"
+	docker push "daemontus/zavazadlo-portal"

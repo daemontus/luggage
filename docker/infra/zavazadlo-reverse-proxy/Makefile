@@ -1,9 +1,7 @@
 all: build push
 
-user := $(shell whoami)
-
 build: 
-	docker build -t "$(user)/zavazadlo-reverse-proxy" .
+	docker build -t "daemontus/zavazadlo-reverse-proxy" .
 
 push:
-	docker push "$(user)/zavazadlo-reverse-proxy"
+	docker push "daemontus/zavazadlo-reverse-proxy"

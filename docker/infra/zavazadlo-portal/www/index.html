@@ -150,9 +150,115 @@
 <div class="uk-section uk-section-muted uk-margin-top uk-margin-bottom">
     <div class="uk-container">
         <h2>Software running on <code style="font-size: 1em;">mystery-shack</code></h2>
-        <p>To be continued...</p>
         <div uk-grid>
-            
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Cell Oracle</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://morris-lab.github.io/CellOracle.documentation/" target="blank">Cell Oracle</a> is a Python library for in silico gene perturbation analysis using single-cell omics data and gene regulatory network models.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="https://celloracle.mystery-shack.unsigned-short.com/" target="blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://celloracle.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">STREAM</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/pinellolab/STREAM" target="blank">STREAM</a> is an interactive pipeline capable of disentangling and visualizing complex branching trajectories from both single-cell transcriptomic and epigenomic data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://stream.mystery-shack.unsigned-short.com/" target="blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://stream.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-section uk-section-muted uk-margin-top uk-margin-bottom">
+    <div class="uk-container">
+        <h2>Management software</h2>
+        <p>These services are only accessible through a Tailscale VPN. If you don't have VPN credentials, this is not for you :) 
+        Credentials for individual services are available in the shared 1Password vault.</p>
+        <div uk-grid>
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">OpenWRT@kokoska</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the main OpenWRT router that is running on <code>kokoska</code> in Brno.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://kokoska/" target="blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">TPLink@kokoska</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the WiFi hotspots that are connected to <code>kokoska</code> in Brno.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="https://kokoska:8043/" target="blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Unraid@zavazadlo</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the Unraid OS on <code>zavazadlo</code> in Bratislava.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://zavazadlo/" target="blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Proxmox@mystery-shack</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the Proxmox OS on <code>mystery-shack</code> in Brno.
+                            Use this link to manage virtual machines running on <code>mystery-shack</code>.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://mystery-shack-proxmox:8006/" target="blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">docker@mystery-shack</h3>
+                        <p class="uk-text-justify">
+                            Online VS Code instance running directly on the <code>mystery-shack-docker</code> virtual machine in Brno.
+                            Use this link to manage the docker containers running on <code>mystery-shack</code> and build new images.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://mystery-shack-docker:8000/" target="blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
         </div>
     </div>
 </div>
