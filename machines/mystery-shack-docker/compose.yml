@@ -21,3 +21,14 @@ services:
       resources:
         limits:
           memory: 96G
+  scenic:
+    image: 'daemonuts/software-scenic:latest'
+    ports:
+      - "10002:8000"
+    volumes:
+      - /nfs/ws-daemontus-hdd/software/scenic:/root/notebook/remote
+      - /notebook/scenic:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G
