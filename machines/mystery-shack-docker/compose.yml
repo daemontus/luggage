@@ -22,7 +22,7 @@ services:
         limits:
           memory: 96G
   scenic:
-    image: 'daemonuts/software-scenic:latest'
+    image: 'daemontus/software-scenic:latest'
     ports:
       - "10002:8000"
     volumes:
