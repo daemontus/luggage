@@ -38,7 +38,8 @@ RUN pip3 install scipy==1.11.3 numpy==1.26.1 tqdm==4.66.1
 # Downalod fa2
 RUN git clone https://github.com/bhargavchippada/forceatlas2.git
 WORKDIR ./forceatlas2
-RUN python3 setup.py install
+# Note that this is not the recommended method, but the recommended method is broken.
+RUN pip install .
 WORKDIR ..
 
 # Download SCENIC.
@@ -51,6 +52,9 @@ RUN git reset --hard e4bdd9f5b7fea1a43d5cb55e2ccb3c221fe7d279
 # this will probably break at some point. But for the initial version, this 
 # should be good enough.
 RUN pip3 install -r requirements.txt
+
+# Some other optional dependencies.
+RUN pip3 install louvain==0.8.1
 
 # Install the actual SCENIC package.
 RUN pip3 install -e .
