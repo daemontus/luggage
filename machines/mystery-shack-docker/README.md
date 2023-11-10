@@ -68,3 +68,4 @@ For the rest of the setup process follow these instructions:
  	- At this point, everything should basically work. However, rebooting the machine can sometimes take a long time 
  	because some of the file connections do not always close properly and we need to wait a few minutes before
  	the system kills them.
+ 	- Also, if you need to update a particular service, you can run `docker compose up -d --no-deps <SERVICE>`. This will only restart *that* container only.
