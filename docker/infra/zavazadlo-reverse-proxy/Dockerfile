@@ -16,6 +16,9 @@ COPY sites/sw.mtlrank.conf /etc/nginx/sites/sw.mtlrank.conf
 COPY sites/sw.celloracle.conf /etc/nginx/sites/sw.celloracle.conf
 COPY sites/sw.stream.conf /etc/nginx/sites/sw.stream.conf
 
+COPY sites/bbm.backend.conf /etc/nginx/sites/bbm.backend.conf
+COPY sites/bbm.frontend.conf /etc/nginx/sites/bbm.frontend.conf
+
 COPY sites/ms.sw.stream.conf /etc/nginx/sites/ms.sw.stream.conf
 COPY sites/ms.sw.celloracle.conf /etc/nginx/sites/ms.sw.celloracle.conf
 COPY sites/ms.sw.scenic.conf /etc/nginx/sites/ms.sw.scenic.conf
