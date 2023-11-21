@@ -44,6 +44,7 @@ For the rest of the setup process follow these instructions:
  		- Run the following to mount NFS only *after* tailscale is started:
  			- https://forum.tailscale.com/t/mount-share-only-if-connected-to-tailscale/3027/8
  			- systemctl add-wants nfs-mountd.service tailscaled.service
+ 		- To re-mount everything once the VM is running, use `sudo mount -a`.
  	- Copy latest compose.yml to /root and run `docker compose up` to test all services
  	- Then, create /lib/systemd/system/docker-compose.service and use:
  		```
