@@ -22,6 +22,7 @@ COPY sites/bbm.frontend.conf /etc/nginx/sites/bbm.frontend.conf
 COPY sites/ms.sw.stream.conf /etc/nginx/sites/ms.sw.stream.conf
 COPY sites/ms.sw.celloracle.conf /etc/nginx/sites/ms.sw.celloracle.conf
 COPY sites/ms.sw.scenic.conf /etc/nginx/sites/ms.sw.scenic.conf
+COPY sites/ms.sw.scboolseq.conf /etc/nginx/sites/ms.sw.scboolseq.conf
 
 COPY sites/ws.daemontus.code.conf /etc/nginx/sites/ws.daemontus.code.conf
 COPY sites/ws.daemontus.lab.conf /etc/nginx/sites/ws.daemontus.lab.conf
