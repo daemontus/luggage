@@ -8,6 +8,19 @@
     <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
     <title>Portal @unsigned-short.com</title>
 
+    <style type="text/css">
+        .shadow-parent {
+            filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+            transition: all 60ms ease-out;
+        }
+        .shadow-parent:hover {
+            transform: scale(1.1);
+        }
+        .clip-circle {
+            clip-path: circle(50px at 50px 50px);
+        }
+    </style>
+
     <script type="text/javascript">
         function check(element, url) {
             console.log(element);
@@ -93,9 +106,10 @@
     <div class="uk-container">
         <span class="uk-heading-small uk-margin-right" style="position: relative; top: 15px;">Apps:</span>
 
-        <a class="uk-button" href="https://plex.unsigned-short.com" target="_blank"><img src="assets/plex.png" width="100"></a>
-        <a class="uk-button" href="https://seafile.unsigned-short.com" target="_blank"><img src="assets/seafile.png" width="100"></a>
-        <a class="uk-button" href="https://download.unsigned-short.com" target="_blank"><img src="assets/download.png" width="100"></a>
+        <a class="uk-button shadow-parent" href="https://plex.unsigned-short.com" target="_blank"><img src="assets/plex.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://seafile.unsigned-short.com" target="_blank"><img src="assets/seafile.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://download.unsigned-short.com" target="_blank"><img src="assets/download.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://photoprism.unsigned-short.com" target="_blank"><img src="assets/photoprism.svg" width="100" class="clip-circle"></a>
     </div>
 </div>
 
