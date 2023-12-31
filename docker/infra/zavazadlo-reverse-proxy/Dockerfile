@@ -11,6 +11,7 @@ COPY sites/plex.conf /etc/nginx/sites/plex.conf
 COPY sites/portal.conf /etc/nginx/sites/portal.conf
 COPY sites/seafile.conf /etc/nginx/sites/seafile.conf
 COPY sites/download.conf /etc/nginx/sites/download.conf
+COPY sites/photoprism.conf /etc/nginx/sites/photoprism.conf
 
 COPY sites/sw.mtlrank.conf /etc/nginx/sites/sw.mtlrank.conf
 COPY sites/sw.celloracle.conf /etc/nginx/sites/sw.celloracle.conf
