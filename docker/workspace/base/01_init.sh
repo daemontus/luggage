@@ -15,6 +15,8 @@ if [ "$WORKSPACE_USER" != "" ]; then
 	# home directory to the workspace user. Of course, if you have mounts
 	# in other places, you have to take care of them manually.
 	chown $WORKSPACE_USER:workspace /home/$WORKSPACE_USER/*
+
+	echo "Transferred ownership to workspace user."
 else
 	echo "No workspace user set."
 fi
