@@ -1,0 +1,120 @@
+/*
+
+        const val keywordOrange = "#CC7832"
+        const val stringGreen = "#6A8759"
+        const val numberBlue = "#6897BB"
+        const val localYellow = "#FFC66D"
+        const val globalViolet = "#9876AA"
+        const val parameterTeal = "#20999D"
+        const val textGray = "#A9B7C6"
+        const val constOrange = "#A5C261"
+        //const val constOrange = "#D0D0FF"
+        const val annotationYellow = "#BBB529"
+        const val commentGray = "#808080"
+        const val unknownRed = "#BC3F3C"
+
+        @Suppress("unused") // used in css for backgrounds, etc.
+        const val bg700 = "#3C3F41"
+        const val bg500 = "#313335"
+        const val bg300 = "#2B2B2B"
+
+        @Suppress("unused") // used in css
+        const val separator = "#4B4B4B"
+
+*/
+
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+  
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+body {
+    background-color: #2B2B2B;
+    color: #A9B7C6;
+}
+
+em {
+    font-style: normal;
+    color: #6A8759;
+}
+
+strong {
+    color: #CC7832;
+}
+
+a {
+    color: #20999D;
+}
+
+code {
+    color: #A5C261;
+}
+
+span.number {
+    color: #6897BB;
+}
+
+span.comment {
+    color: #808080;
+}
+
+h1.logo {
+    color: #CC7832;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 900;
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 4em;
+    margin-bottom: 1em;
+}
+
+footer {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    padding-bottom: 5em;
+    padding-top: 5em;
+}
+
+#page article {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 1.0em;
+    padding-right: 1.0em;
+    padding-bottom: 5em;
+    padding-top: 5em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1em;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+}
+
+#page article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+}
+
+#page article p {
+    text-align: justify;
+    line-height: 1.4;
+}
+
+#page article li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    text-align: left;
+}
+
+#page article ul {
+    list-style-type: "> ";
+}
