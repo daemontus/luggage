@@ -48,8 +48,8 @@ services:
     ports:
       - '10004:8000'
     volumes:
-      - /nfs/ws-daemontus-hdd/software/scboolseq:/root/notebook/remote
-      - /notebook/scboolseq:/root/notebook/local
+      - /nfs/ws-daemontus-hdd/software/genie3:/root/notebook/remote
+      - /notebook/genie3:/root/notebook/local
     deploy:
       resources:
         limits:
