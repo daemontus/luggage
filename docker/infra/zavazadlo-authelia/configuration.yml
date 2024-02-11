@@ -284,9 +284,26 @@ access_control:
   default_policy: 'one_factor'
 
   rules:
-    - domain: 'files.usigned-short.com'
-      policy: two_factor
-      
+    - domain:
+        - "files.unsigned-short.com"
+      resources:
+        - "^/api/public/dl/*"
+        - "/share/*"
+        - "/static/js/*"
+        - "/static/css/*"
+        - "/static/img/*"
+        - "/static/themes/*"
+        - "/static/fonts/*"
+        - "/static/assets/*"
+      policy: bypass
+
+    - domain: 'files.unsigned-short.com'
+      subject:
+        - 'group:owners'
+      policy: 'two_factor'
+
+    - domain: 'files.unsigned-short.com'
+      policy: 'deny'
   # networks:
     # - name: internal
     #   networks:
