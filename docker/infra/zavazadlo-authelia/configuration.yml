@@ -283,6 +283,10 @@ access_control:
   ## resource if there is no policy to be applied to the user.
   default_policy: 'one_factor'
 
+  rules:
+    - domain: 'files.usigned-short.com'
+      policy: two_factor
+      
   # networks:
     # - name: internal
     #   networks:
