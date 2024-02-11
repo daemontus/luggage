@@ -43,3 +43,14 @@ services:
       resources:
         limits:
           memory: 96G
+  genie3:
+    image: 'daemontus/software-genie3:latest'
+    ports:
+      - '10004:8000'
+    volumes:
+      - /nfs/ws-daemontus-hdd/software/scboolseq:/root/notebook/remote
+      - /notebook/scboolseq:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G

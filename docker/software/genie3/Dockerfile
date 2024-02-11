@@ -26,7 +26,12 @@ EXPOSE 8000
 # Copy GENIE3 sources and examples.
 COPY ./package /root/notebook/genie3-source
 COPY ./data.txt /root/notebook/example/data.txt
-COPT ./example.ipynb /root/notebook/example/example.ipynb
-COPT ./GENIE3_python_doc.pdf /root/notebook/example/instructions.pdf
+COPY ./example.ipynb /root/notebook/example/example.ipynb
+COPY ./GENIE3_python_doc.pdf /root/notebook/example/instructions.pdf
 
+# Update pip and setuptools
+RUN pip install setuptools --upgrade
+RUN python3 -m pip install --upgrade pip
+
+# Install GENIE3
 RUN pip install /root/notebook/genie3-source
