@@ -26,6 +26,7 @@ COPY sites/ms.sw.celloracle.conf /etc/nginx/sites/ms.sw.celloracle.conf
 COPY sites/ms.sw.scenic.conf /etc/nginx/sites/ms.sw.scenic.conf
 COPY sites/ms.sw.scboolseq.conf /etc/nginx/sites/ms.sw.scboolseq.conf
 COPY sites/ms.sw.genie3.conf /etc/nginx/sites/ms.sw.genie3.conf
+COPY sites/ms.sw.genie3.conf /etc/nginx/sites/ms.gpu.conf
 
 COPY sites/ws.daemontus.code.conf /etc/nginx/sites/ws.daemontus.code.conf
 COPY sites/ws.daemontus.lab.conf /etc/nginx/sites/ws.daemontus.lab.conf
