@@ -4,6 +4,8 @@ FROM daemontus/workspace-base:latest
 # Update apt cache, just to be safe.
 RUN apt-get update --yes
 
+RUN apt-get install graphviz
+
 RUN apt-get install --yes --no-install-recommends \
 	python3 \
 	python3-dev \
