@@ -4,16 +4,6 @@ FROM daemontus/workspace-base:latest
 # Update apt cache, just to be safe.
 RUN apt-get update --yes
 
-# Some of the Python dependencies have C dependencies that
-# need to be built somehow.
-RUN apt-get install --yes --no-install-recommends \
-	build-essential \
-	pkg-config \
-	cmake \
-	make \
-	gcc \
-	clang
-
 RUN apt-get install --yes --no-install-recommends \
 	python3 \
 	python3-dev \
