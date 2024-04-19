@@ -54,3 +54,14 @@ services:
       resources:
         limits:
           memory: 96G
+  aeon:
+    image: 'daemontus/software-aeon-py:latest'
+    ports:
+      - '10005:8000'
+    volumes:
+      - /nfs/ws-daemontus-hdd/software/aeon:/root/notebook/remote
+      - /notebook/aeon:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G
