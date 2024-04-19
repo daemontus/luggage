@@ -1,0 +1,4 @@
+pandas
+numpy
+graphviz
+biodivine_aeon==1.0.0a7
