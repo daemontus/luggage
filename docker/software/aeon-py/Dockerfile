@@ -4,12 +4,11 @@ FROM daemontus/workspace-base:latest
 # Update apt cache, just to be safe.
 RUN apt-get update --yes
 
-RUN apt-get install graphviz
-
 RUN apt-get install --yes --no-install-recommends \
 	python3 \
 	python3-dev \
-	python3-pip
+	python3-pip \
+	graphviz
 
 # Install jupter notebooks
 RUN pip install notebook
