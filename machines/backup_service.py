@@ -43,7 +43,7 @@ from pathlib import Path
 # starting the service. Here, we give some reasonable defaults that are
 # used in our case.
 
-MACHINE_URL = 'backups@zavazadlo'
+MACHINE_URL = 'root@zavazadlo'
 REMOTE_LIST_FILE = '/mnt/user/backups_user/backup-locations.txt'
 LOCAL_BACKUP_DIR = '/mnt/hdd/backups/zavazadlo'
 SEND_REPORT_TO = 'daemontus@gmail.com'
@@ -77,7 +77,7 @@ def handle_error(message = None):
 	# Closes the smtp server.
 	smtpserver.quit()
 
-def handle_success(locations):	
+def handle_success(locations, duration):	
 	smtpserver = smtplib.SMTP('smtp.gmail.com', 587) # Server to use.
 	smtpserver.ehlo()
 	smtpserver.starttls()
@@ -91,7 +91,7 @@ def handle_success(locations):
 
 	# Creates the text, subject, 'from', and 'to' of the message.
 	#msg = MIMEText('actual public IP: %s' %  public_ip)
-	msg = MIMEText(f"Backup job completed successfully.\n\n{locations}")
+	msg = MIMEText(f"Backup job completed successfully in {duration}.\n\n{locations}")
 	msg['Subject'] = 'Backup success'
 	msg['From'] = GMAIL_USER
 	msg['To'] = SEND_REPORT_TO
@@ -99,6 +99,9 @@ def handle_success(locations):
 	smtpserver.sendmail(GMAIL_USER, [SEND_REPORT_TO], msg.as_string())
 	# Closes the smtp server.
 	smtpserver.quit()
+
+start_time = datetime.now()
+print("Starting backup at", start_time)
 
 status = os.system(f"scp {MACHINE_URL}:{REMOTE_LIST_FILE} {LOCAL_BACKUP_DIR}/backup-locations.txt")
 
@@ -115,9 +118,9 @@ for location in backup_locations.splitlines():
 		print(f"Skipping location `{location[1:]}`.")
 		continue
 	if not location.startswith('/'):
-		handle_error(f"Invalid {location}")
+		handle_error(f"Invalid `{location}`.")
 		sys.exit(2)
-	print(f"Synchronizing location `{location}`.")
+	print(f"Synchronizing location {location}")
 	# -a means directory is processed recursively and permissions are preserved.
 	# -z means the transfer uses compression.
 	# -v is just verbose to print the list of transferred files.
@@ -145,5 +148,9 @@ for location in backup_locations.splitlines():
 	else:
 		results += f"{status} [ERR] {location}\n"
 
+end_time = datetime.now()
+duration = end_time - start_time
+print("Backup completed at:", end_time)
+print("Total duration:", duration)
 
-handle_success(results)
+handle_success(results, duration)
