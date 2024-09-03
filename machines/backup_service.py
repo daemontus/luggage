@@ -103,7 +103,7 @@ def handle_success(locations, duration):
 start_time = datetime.now()
 print("Starting backup at", start_time)
 
-status = os.system(f"scp {MACHINE_URL}:{REMOTE_LIST_FILE} {LOCAL_BACKUP_DIR}/backup-locations.txt")
+status = os.system(f"scp \"{MACHINE_URL}:{REMOTE_LIST_FILE}\" \"{LOCAL_BACKUP_DIR}/backup-locations.txt\"")
 
 if status != 0:
 	handle_error("Failed to retrieve backup locations.")
@@ -140,7 +140,7 @@ for location in backup_locations.splitlines():
 		handle_error(f"Cannot create target dir for {location}")
 		sys.exit(2)
 	
-	status = os.system(f"rsync -azvW --delete {MACHINE_URL}:{location} {local_path} &> {LOCAL_BACKUP_DIR}/rsync_{location_id}.log")
+	status = os.system(f"rsync -azvW --delete \"{MACHINE_URL}:{location}\" \"{local_path}\" &> \"{LOCAL_BACKUP_DIR}/rsync_{location_id}.log\"")
 	if status == 0:
 		results += f"{status} [OK] {location}\n"	
 	elif status == 23:
