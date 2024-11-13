@@ -5,7 +5,7 @@ services:
       - "10000:8888"
     volumes:
       - /nfs/ws-daemontus-hdd/software/celloracle:/root/notebook/remote
-      - /notebook/celloracle:/root/notebook/local
+      - /media/local/notebook/celloracle:/root/notebook/local
     deploy:
       resources:
         limits:
@@ -16,7 +16,7 @@ services:
       - "10001:8000"
     volumes:
       - /nfs/ws-daemontus-hdd/software/stream:/root/notebook/remote
-      - /notebook/stream:/root/notebook/local
+      - /media/local/notebook/stream:/root/notebook/local
     deploy:
       resources:
         limits:
@@ -27,7 +27,7 @@ services:
       - "10002:8000"
     volumes:
       - /nfs/ws-daemontus-hdd/software/scenic:/root/notebook/remote
-      - /notebook/scenic:/root/notebook/local
+      - /media/local/notebook/scenic:/root/notebook/local
     deploy:
       resources:
         limits:
@@ -38,7 +38,7 @@ services:
       - '10003:8000'
     volumes:
       - /nfs/ws-daemontus-hdd/software/scboolseq:/root/notebook/remote
-      - /notebook/scboolseq:/root/notebook/local
+      - /media/local/notebook/scboolseq:/root/notebook/local
     deploy:
       resources:
         limits:
@@ -49,7 +49,7 @@ services:
       - '10004:8000'
     volumes:
       - /nfs/ws-daemontus-hdd/software/genie3:/root/notebook/remote
-      - /notebook/genie3:/root/notebook/local
+      - /media/local/notebook/genie3:/root/notebook/local
     deploy:
       resources:
         limits:
@@ -60,7 +60,21 @@ services:
       - '10005:8000'
     volumes:
       - /nfs/ws-daemontus-hdd/software/aeon:/root/notebook/remote
-      - /notebook/aeon:/root/notebook/local
+      - /media/local/notebook/aeon:/root/notebook/local
+    deploy:
+      resources:
+        limits:
+          memory: 96G
+  hakos:
+    image: 'daemontus/workspace-base-science'
+    environment:
+      WORKSPACE_USER: hakos
+      VSCODE_DATA: /home/hakos/data/.vscode_server      
+    ports:
+      - '10006:8000'
+      - '10007:8001'
+    volumes:
+      - /media/local/hakos:/home/hakos/data
     deploy:
       resources:
         limits:
