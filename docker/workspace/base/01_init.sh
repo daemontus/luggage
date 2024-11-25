@@ -17,6 +17,14 @@ if [ "$WORKSPACE_USER" != "" ]; then
 	chown $WORKSPACE_USER:workspace /home/$WORKSPACE_USER/*
 
 	echo "Transferred ownership to workspace user."
+
+	if [ "$ALLOW_SUDO" == "yes" ]; then
+		# Sudo should be already installed, we just need to enable it.
+		# For whatever reason, adding the user to sudo group is not enough and
+		# we also have to update the sudoers file directly.
+		echo "$WORKSPACE_USER:$WORKSPACE_USER" | chpasswd && adduser $WORKSPACE_USER sudo
+		echo "$WORKSPACE_USER ALL=(ALL:ALL) ALL" >> /etc/sudoers
+	fi
 else
 	echo "No workspace user set."
 fi
