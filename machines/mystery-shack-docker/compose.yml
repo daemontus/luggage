@@ -66,12 +66,12 @@ services:
         limits:
           memory: 96G
   hakos:
-    image: 'daemontus/workspace-base-conda'
+    image: 'daemontus/workspace-code-conda'
     environment:
       WORKSPACE_USER: hakos
+      ALLOW_SUDO: yes
       VSCODE_DATA: /home/hakos/data/.vscode_server      
     ports:
-      - '10006:8000'
       - '10007:8001'
     volumes:
       - /media/local/hakos:/home/hakos/data

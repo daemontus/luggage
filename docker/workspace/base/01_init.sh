@@ -4,7 +4,7 @@
 # that is already mounted in her home directory is actually accessible.
 if [ "$WORKSPACE_USER" != "" ]; then
 	# Create the workspace user if she does not exist.
-	id -u $WORKSPACE_USER >/dev/null 2>&1 || useradd -u 1000 -g workspace -s /bin/bash -m $WORKSPACE_USER
+	id -u $WORKSPACE_USER >/dev/null 2>&1 || useradd -u 2000 -g workspace -s /bin/bash -m $WORKSPACE_USER
 
 	# In some cases, the user directory is owned by root, which makes
 	# some software freak out. This should prevent it.
@@ -18,12 +18,13 @@ if [ "$WORKSPACE_USER" != "" ]; then
 
 	echo "Transferred ownership to workspace user."
 
-	if [ "$ALLOW_SUDO" == "yes" ]; then
+	if [ "$ALLOW_SUDO" = "yes" ]; then
 		# Sudo should be already installed, we just need to enable it.
 		# For whatever reason, adding the user to sudo group is not enough and
 		# we also have to update the sudoers file directly.
 		echo "$WORKSPACE_USER:$WORKSPACE_USER" | chpasswd && adduser $WORKSPACE_USER sudo
 		echo "$WORKSPACE_USER ALL=(ALL:ALL) ALL" >> /etc/sudoers
+		echo "Sudo enabled for $WORKSPACE_USER."
 	fi
 else
 	echo "No workspace user set."
