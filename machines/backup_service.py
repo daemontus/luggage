@@ -44,7 +44,7 @@ from pathlib import Path
 # used in our case.
 
 MACHINE_URL = 'root@zavazadlo'
-REMOTE_LIST_FILE = '/mnt/user/backups_user/backup-locations.txt'
+REMOTE_LIST_FILE = '/mnt/user/appdata/backup-locations.txt'
 LOCAL_BACKUP_DIR = '/mnt/hdd/backups/zavazadlo'
 SEND_REPORT_TO = 'daemontus@gmail.com'
 # Currently, only gmail senders are supported, but you can configure this quite easily.
