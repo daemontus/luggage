@@ -1,0 +1,66 @@
+services:
+  # Icon:
+  #   https://github.com/maschhoff/docker/raw/master/filebrowser/35781395.png
+  services-file-browser:
+    image: filebrowser/filebrowser:latest
+    restart: unless-stopped
+    container_name: services-file-browser
+    environment:
+      - FB_NOAUTH=noauth
+    ports:
+      - '10004:80'
+    volumes:
+      - /mnt/user/Media:/srv/Media
+      - /mnt/user/Archive:/srv/Archive
+      - /mnt/user/Personal:/srv/Personal
+      - /mnt/user/appdata/filebrowser/database.db:/db/database.db
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512MB'
+
+  # Icon:
+  #   https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png
+  services-plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: services-plex
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    volumes:
+      - /mnt/user/Media/Library/:/movies
+      - /mnt/user/appdata/plex:/config
+    deploy:
+      resources:
+        limits:
+          # Needs a lot of resources for transcoding...
+          cpus: '4.0'
+          memory: '8G'
+
+  # Icon:
+  #   https://hotio.dev/webhook-avatars/qbittorrent.png
+  services-qbittorrent:
+    image: ghcr.io/hotio/qbittorrent
+    container_name: services-qbittorrent
+    restart: unless-stopped
+    environment:
+      - PUID=99
+      - PGID=100
+      - UMASK=002
+    ports:
+      - '10000:8080'
+    volumes:
+      - /mnt/user/appdata/qbittorrent:/config
+      - /mnt/user/Media/Downloads/:/downloads
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '1G'

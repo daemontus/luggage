@@ -1,0 +1,127 @@
+services:
+
+  # Icon:
+  #   https://github.com/daemontus/websupport-ddns-docker/raw/master/logo.png
+  infra-websupport-ddns:
+    image: daemontus/websupport-ddns:latest
+    restart: unless-stopped
+    container_name: infra-websupport-ddns
+    environment:
+      WS_API_KEY: ${WS_API_KEY}
+      WS_API_SECRET: ${WS_API_SECRET}
+      WS_USER_ID: ${WS_USER_ID}
+      WS_DOMAIN: unsigned-short.com
+      WS_CHECK_DOMAIN: zavazadlo.unsigned-short.com
+      WS_RECORD_ID_1: 44917592
+      WS_RECORD_NAME_1: zavazadlo
+      GMAIL_RECEIVER: daemontus@gmail.com
+      GMAIL_USER: ${GMAIL_USER}
+      GMAIL_APP_PASSWORD: ${GMAIL_APP_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+
+  # Icon:
+  #   https://github.com/daemontus/luggage/raw/main/docker/infra/dnsmasq/logo.png
+  infra-dnsmasq:
+    image: daemontus/dnsmasq:latest
+    restart: unless-stopped
+    container_name: infra-dnsmasq
+    networks:
+      br0:
+        ipv4_address: 192.168.86.3
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - /mnt/user/appdata/dnsmasq/dns.conf:/etc/dnsmasq.conf
+      - /mnt/user/appdata/dnsmasq/dns.log:/var/log/dnsmasq.log
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+
+  # Icon:
+  #   https://raw.githubusercontent.com/daemontus/luggage/main/docker/infra/zavazadlo-authelia/logo.png
+  # Web UI:
+  #   https://auth.unsigned-short.com
+  infra-authelia:
+    image: authelia/authelia:latest
+    restart: unless-stopped
+    container_name: infra-authelia
+    ports:
+      # Auth API endpoint
+      - '9091:9091'
+      # Monitoring API
+      - '9959:9959'
+    volumes:
+      - /mnt/user/appdata/authelia:/config
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '512M'
+
+  # Icon:
+  #   https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png
+  # Web UI:
+  #   https://portal.unsigned-short.com
+  infra-portal:
+    image: daemontus/zavazadlo-portal:latest
+    restart: unless-stopped
+    container_name: infra-portal
+    ports:
+      - '10001:80'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+
+  # Icon:
+  #   https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png
+  infra-proxy-local:
+    image: daemontus/zavazadlo-reverse-proxy:latest
+    restart: unless-stopped
+    container_name: infra-proxy-local
+    networks:
+      br0:
+        ipv4_address: 192.168.86.4
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /mnt/user/appdata/certbot:/var/www/certbot
+      - /mnt/user/appdata/letsencrypt:/etc/nginx/ssl
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256MB'
+
+  # Icon:
+  #   https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png
+  infra-proxy-global:
+    image: daemontus/zavazadlo-reverse-proxy:latest
+    restart: unless-stopped
+    container_name: infra-proxy-global
+    ports:
+      - '8080:80'
+      - '4433:443'
+    volumes:
+      - /mnt/user/appdata/certbot:/var/www/certbot
+      - /mnt/user/appdata/letsencrypt:/etc/nginx/ssl
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256MB'
+
+networks:
+  # Default bridge network created by unraid
+  br0:
+    name: br0
+    external: true
