@@ -20,6 +20,7 @@ COPY sites/sw.stream.conf /etc/nginx/sites/sw.stream.conf
 
 COPY sites/bbm.backend.conf /etc/nginx/sites/bbm.backend.conf
 COPY sites/bbm.frontend.conf /etc/nginx/sites/bbm.frontend.conf
+COPY sites/websockets.conf /etc/nginx/sites/websockets.conf
 
 COPY sites/ms.sw.stream.conf /etc/nginx/sites/ms.sw.stream.conf
 COPY sites/ms.sw.celloracle.conf /etc/nginx/sites/ms.sw.celloracle.conf
