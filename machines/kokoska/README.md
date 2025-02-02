@@ -29,7 +29,7 @@ docker run -d \
   -e TZ=Etc/UTC \
   -v omada-data:/opt/tplink/EAPController/data \
   -v omada-logs:/opt/tplink/EAPController/logs \
-  mbentley/omada-controller:5.13
+  mbentley/omada-controller:5.15
 ```
 
 To upgrade the controller, find the ID of the container through `docker ps`. Then run `docker stop -t 360 $ID` and `docker rm $ID`. Then update the version in the command above and run it (or consult the container documentation to see if there are any new steps you need to take before you upgrade).
