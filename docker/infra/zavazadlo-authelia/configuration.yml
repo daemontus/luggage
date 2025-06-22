@@ -481,12 +481,33 @@ identity_providers:
       public: false
       authorization_policy: two_factor
       redirect_uris:
+        # For testing, add: - https://openidconnect.net/callback
         - https://seafile.unsigned-short.com/oauth/callback/
       scopes:
         - openid
         - profile
         - email
       userinfo_signing_algorithm: none
+    - id: immich
+      description: Immich
+      secret: PUT_SECRET_HERE
+      public: false
+      authorization_policy: two_factor
+      redirect_uris:
+        - app.immich:/
+        - app.immich:///oauth-callback 
+        - https://immich.unsigned-short.com/auth/login
+        - https://immich.unsigned-short.com/user-settings
+      response_types:
+        - code
+        - token
+      scopes:
+        - openid
+        - profile
+        - email
+      userinfo_signing_algorithm: none
+      userinfo_signed_response_alg: 'none'
+      token_endpoint_auth_method: 'client_secret_post'
 
 ##
 ## Notification Provider
