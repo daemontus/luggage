@@ -1,0 +1,42 @@
+services:
+
+  synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    # Since synapse does not retry to connect to the database, restart upon
+    # failure
+    restart: unless-stopped
+    # See the readme for a full documentation of the environment settings
+    # NOTE: You must edit homeserver.yaml to use postgres, it defaults to sqlite
+    networks:
+      - synapse-net
+    environment:
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+    volumes:
+      # For now, we will save everything to appdata; 
+      # if it gets too big, we can always move it...
+      - /mnt/user/appdata/matrix/data:/data
+      # .. or you may split this between different storage points
+      # - ./files:/data
+      # - /path/to/ssd:/data/uploads
+      # - /path/to/large_hdd:/data/media
+    depends_on:
+      - synapse-db
+    ports:
+      - 8008:8008/tcp
+
+  synapse-db:
+    image: docker.io/postgres:15-alpine
+    # Change that password, of course!
+    networks:
+      - synapse-net
+    environment:
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=${SYNAPSE_DB_PASSWORD}
+      # ensure the database gets created correctly
+      # https://element-hq.github.io/synapse/latest/postgres.html#set-up-database
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /mnt/user/appdata/matrix/db:/var/lib/postgresql/data
+
+networks:
+  synapse-net:
