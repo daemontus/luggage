@@ -507,7 +507,29 @@ identity_providers:
         - email
       userinfo_signing_algorithm: none
       userinfo_signed_response_alg: 'none'
-      token_endpoint_auth_method: 'client_secret_post'
+      token_endpoint_auth_method: 'client_secret_post'    
+    - client_id: 'synapse'
+      client_name: 'Synapse'
+      client_secret: PUT_DIGEST_SECRET_HERE
+      public: false
+      authorization_policy: 'two_factor'
+      require_pkce: false
+      pkce_challenge_method: ''
+      redirect_uris:
+        - 'https://matrix.unsigned-short.com/_synapse/client/oidc/callback'
+        - 'https://unsigned-short.com/_synapse/client/oidc/callback'
+      scopes:
+        - 'openid'
+        - 'profile'
+        - 'email'
+        - 'groups'
+      response_types:
+        - 'code'
+      grant_types:
+        - 'authorization_code'
+      access_token_signed_response_alg: 'none'
+      userinfo_signed_response_alg: 'none'
+      token_endpoint_auth_method: 'client_secret_basic'
 
 ##
 ## Notification Provider
