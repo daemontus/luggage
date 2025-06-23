@@ -33,6 +33,9 @@ database:
     cp_min: 5
     cp_max: 10
 
+app_service_config_files:
+  - /mautrix-telegram/registration.yaml
+  
 log_config: "/data/unsigned-short.com.log.config"
 media_store_path: /data/media_store
 registration_shared_secret: "${REGISTRATION_SHARED_SECRET}"
