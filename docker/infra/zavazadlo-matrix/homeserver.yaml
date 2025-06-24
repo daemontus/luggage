@@ -35,6 +35,11 @@ database:
 
 app_service_config_files:
   - /mautrix-telegram/registration.yaml
+  - /mautrix-meta/registration.yaml
+  - /mautrix-discord/registration.yaml
+  - /mautrix-slack/registration.yaml
+  - /mautrix-signal/registration.yaml
+  - /mautrix-whatsapp/registration.yaml
   
 log_config: "/data/unsigned-short.com.log.config"
 media_store_path: /data/media_store

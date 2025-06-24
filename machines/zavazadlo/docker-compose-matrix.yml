@@ -16,6 +16,11 @@ services:
       # if it gets too big, we can always move it...
       - /mnt/user/appdata/matrix/data:/data
       - /mnt/user/appdata/matrix/mautrix-telegram:/mautrix-telegram
+      - /mnt/user/appdata/matrix/mautrix-meta:/mautrix-meta
+      - /mnt/user/appdata/matrix/mautrix-discord:/mautrix-discord
+      - /mnt/user/appdata/matrix/mautrix-slack:/mautrix-slack
+      - /mnt/user/appdata/matrix/mautrix-signal:/mautrix-signal
+      - /mnt/user/appdata/matrix/mautrix-whatsapp:/mautrix-whatsapp
       # .. or you may split this between different storage points
       # - ./files:/data
       # - /path/to/ssd:/data/uploads
@@ -41,11 +46,63 @@ services:
 
   mautrix-telegram:
     image: dock.mau.dev/mautrix/telegram:latest
+    depends_on:
+      - synapse-db
+      - synapse
     networks:
       - synapse-net
     volumes:
       - /mnt/user/appdata/matrix/mautrix-telegram:/data
 
+  mautrix-meta:
+    image: dock.mau.dev/mautrix/meta:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /mnt/user/appdata/matrix/mautrix-meta:/data
+
+  mautrix-discord:
+    image: dock.mau.dev/mautrix/discord:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /mnt/user/appdata/matrix/mautrix-discord:/data
+
+  mautrix-slack:
+    image: dock.mau.dev/mautrix/slack:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /mnt/user/appdata/matrix/mautrix-slack:/data
+
+  mautrix-signal:
+    image: dock.mau.dev/mautrix/signal:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /mnt/user/appdata/matrix/mautrix-signal:/data
+
+  mautrix-whatsapp:
+    image: dock.mau.dev/mautrix/whatsapp:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /mnt/user/appdata/matrix/mautrix-whatsapp:/data
 
 networks:
   synapse-net:
