@@ -83,6 +83,22 @@ services:
 
   # Icon:
   #   https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png
+  # Web UI:
+  #   https://sam.unsigned-short.com
+  infra-sam:
+    image: daemontus/zavazadlo-sam:latest
+    restart: unless-stopped
+    container_name: infra-sam
+    ports:
+      - '10010:80'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+
+  # Icon:
+  #   https://github.com/daemontus/luggage/raw/main/docker/infra/zavazadlo-reverse-proxy/logo.png
   infra-proxy-local:
     image: daemontus/zavazadlo-reverse-proxy:latest
     restart: unless-stopped

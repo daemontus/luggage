@@ -14,6 +14,7 @@ COPY sites/download.conf /etc/nginx/sites/download.conf
 COPY sites/immich.conf /etc/nginx/sites/immich.conf
 COPY sites/filebrowser.conf /etc/nginx/sites/filebrowser.conf
 COPY sites/matrix.conf /etc/nginx/sites/matrix.conf
+COPY sites/sam.conf /etc/nginx/sites/sam.conf
 
 COPY sites/sw.mtlrank.conf /etc/nginx/sites/sw.mtlrank.conf
 COPY sites/sw.celloracle.conf /etc/nginx/sites/sw.celloracle.conf
