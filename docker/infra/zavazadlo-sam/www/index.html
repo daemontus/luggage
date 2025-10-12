@@ -1,0 +1,84 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script type="text/javascript" src="/js/uikit.min.js"></script>
+    <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
+    <title>Sam Pastva</title>
+
+    <style type="text/css">
+        .shadow-parent {
+            filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+            transition: all 60ms ease-out;
+        }
+        .shadow-parent:hover {
+            transform: scale(1.1);
+        }
+        .clip-circle {
+            clip-path: circle(50px at 50px 50px);
+        }
+        .header-image {
+            position: relative;
+            top: -8px;
+            left: -32px;            
+            width: 100px;
+            height: 100px;
+            clip-path: circle(50px at 50px 50px);
+        }
+        .muni {
+            font-family: 'Muni', monospace;
+            border: 1px solid black;
+            padding: 4px 12px 4px 12px;
+        }
+        .justify {
+            text-align: justify;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="uk-section uk-section-default">
+<div class="uk-container">
+
+<h1 class="uk-heading-large"><img src="./assets/profile.1.rotated.jpg" class="header-image">Hi! I'm Sam.</h1>
+
+<div style="margin-left: 104px;">
+    <p class="uk-text-lead">I am an assitant professor at <a href="https://www.fi.muni.cz/" target="_blank">FI MUNI</a> in Brno (Czechia).</p>
+    <p class="uk-text-large justify">I do research in <b>logic-based modeling</b> (e.g. Boolean networks) of biological processes in the <a href="https://sybila.fi.muni.cz/" target="_blank">Sybila</a> lab. We try to better understand biology by learning simple, explainable logic-based programs replicating the behavior of real <a href="https://en.wikipedia.org/wiki/Gene_regulatory_network" target="_blank">regulatory networks</a>. Our unique expertise is in building scalable <a href="https://en.wikipedia.org/wiki/Automated_reasoning" target="_blank">automated reasoning</a> methods and robust <a href="https://github.com/sybila/" target="_blank">software tools</a>.</p>
+    <p class="uk-text-large uk-margin-remove-bottom">I am always looking forward to meaningful connections! Get in touch at <i>sam.pastva</i>[at]<i>gmail.com</i>, or <i>xpastva</i>[at]<i>fi.muni.cz</i> and we can chat. I'm also on <a href="https://mastodon.social/@daemontus" target="_blank">Mastodon</a>, <a href="https://bsky.app/profile/daemontus.bsky.social" target="_blank">Bluesky</a> and <a href="https://www.researchgate.net/profile/Samuel-Pastva?ev=hdr_xprf" target="_blank">ResearchGate</a>.</p>
+    <h2>Try the software I'm building!</h2>
+    <p class="justify">I always try to be available to anyone who is evaluating our software for their use case. It's academic software, so it's never going to be perfect ;) If you think that something if off, or just need some pointers before you start diving in, let me know and we can work something out together.</p>
+    <ul>
+        <li class="justify"><a href="https://pypi.org/project/biodivine-aeon/" target="_blank"><b>AEON.py</b></a> is a comprehensive Python package for reasoning about Boolean networks using BDDs. It may not have the fastest, shiniest algorithm for every task, but in general, if you can think of a BN-related question, AEON.py can typically answer it. Thanks to the symbolic BDD-based representation, you can scale to useful network sizes even with relatively "naive" algorithms. Out of the box, we support attractor detection in asynchronous update, fixed point and trap space computation, reachability, reduction, control, and many additional features. We also support <b>partially specified Boolean networks</b> that can be used to collectively analyze large ensembles of similar networks efficiently.</li>
+        <li class="justify"><a href="https://biodivine.fi.muni.cz/aeon/" target="_blank"><b>AEON</b></a> also provides an interactive online editor of Boolean networks through which you can run basic analysis tasks and visualize their results. It uses interactive decision trees to explain how changes is logical parameters or unknown network behavior translate to changes in network attractors. Similar technique is also availabe in <a href="https://github.com/sybila/biodivine-bn-classifier" target="_blank"><b>BN Classifier</b></a>, but for a wide range of general properties, not just attractor repertoire.</li>
+        <li class="justify"><a href="https://github.com/sybila/biodivine-boolean-models" target="_blank"><b>Biodivine Boolean Models</b></a> is the most comprehensive database of published Boolean networks (that we know of :)). Compared to other projects, it performs comprehensive static analysis of all models, removing logical inconsistencies such as unused variables/regulations or incorrect monotonicity labels. This way, we already detected and corrected hundreds of issues in real-world models. It provides versioning in a wide range of model formats and is open to public contributions.</li>
+        <li class="justify"><a href="https://github.com/jcrozum/biobalm" target="_blank"><b>biobalm</b></a> is a Python package for building <i>succession diagrams</i> of Boolean networks and using their structure to efficiently detect attractors. As far as we know, it is the most scalable and versatile tool for finding attractors in asynchronous BNs, smartly combining a wide range of methods.</li>
+        <li class="justify"><a href="https://github.com/daemontus/tsconj" target="_blank"><b>tsconj</b></a> and <a href="https://github.com/giang-trinh/trap-mvn" target="_blank"><b>trap-mvn</b></a> are Python packages for efficient detection of trap spaces across based on answer set programming. They stand out by targeting a wide range of logic-based model formalisms (Boolean networks, unitary multi-valued models, general multi-valued models). They are extremely scalable, allowing analysis of networks with thousands of variables.</li>
+        <li class="justify"><a href="https://github.com/sybila/biodivine-lib-bdd" target="_blank"><b>lib-bdd</b></a> is our library for working with Binary Decision Diagrams (BDDs) that is used in virtually all our tools. It was one of the first fully featured BDD libraries written completely in Rust. While several more powerful implementations have appeared since, it remains popular due to its simple architecture and light-weight API.</li>        
+    </ul>
+    <h2>Read the papers I'm writing!</h2>
+    <p>Here are some recent interesting papers that I worked on. For the most up-to-date list, see <a href="https://scholar.google.com/citations?user=Gv2OsMgAAAAJ", target="_blank">Google scholar</a>.</p>
+    <ul>
+        <li class="justify">Pastva, S., Park, K. H., Huvar, O., Rozum, J. C., & Albert, R. (2025). <a href="https://doi.org/10.1007/s00285-025-02235-8" target="_blank">An open problem: Why are motif-avoidant attractors so rare in asynchronous Boolean networks?</a>. Journal of Mathematical Biology, 91(1), 11.</li>
+        <li class="justify">Kabir, M., Trinh, V. G., Pastva, S., & Meel, K. S. (2025). <a href="    
+https://doi.org/10.48550/arXiv.2506.06013" target="_blank">Scalable Counting of Minimal Trap Spaces and Fixed Points in Boolean Networks</a>. arXiv preprint arXiv:2506.06013.</li>
+        <li class="justify">Trinh, V. G., Park, K. H., Pastva, S., & Rozum, J. C. (2025). <a href="https://doi.org/10.1093/bioinformatics/btaf280" target="_blank">Mapping the attractor landscape of Boolean networks with biobalm</a>. Bioinformatics, 41(5), btaf280.</li>
+        <li class="justify">Trinh, V. G., Benhamou, B., Pastva, S., & Soliman, S. (2024, March). <a href="https://doi.org/10.1609/aaai.v38i9.28943" target="_blank">Scalable enumeration of trap spaces in Boolean networks via answer set programming</a>. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 38, No. 9, pp. 10714-10722).</li>
+        <li class="justify">Trinh, V. G., Benhamou, B., Henzinger, T., & Pastva, S. (2023). <a href="https://doi.org/10.1093/bioinformatics/btad262" target="_blank">Trap spaces of multi-valued networks: definition, computation, and applications</a>. Bioinformatics, 39(Supplement_1), i513-i522.</li>
+        <li class="justify">Beneš, N., Brim, L., Huvar, O., Pastva, S., & Šafránek, D. (2023). <a href="https://doi.org/10.1093/bioinformatics/btad158" target="_blank">Boolean network sketches: a unifying framework for logical model inference</a>. Bioinformatics, 39(4), btad158.</li>
+        <li class="justify">Pastva, S., & Henzinger, T. A. (2023). <a href="https://doi.org/10.34727/2023/isbn.978-3-85448-060-0_20" target="_blank">Binary decision diagrams on modern hardware</a>. In Proceedings of the 23rd Conference on Formal Methods in Computer-Aided Design.</li>
+        <li class="justify">Beneš, N., Brim, L., Huvar, O., Pastva, S., Šafránek, D., & Šmijáková, E. (2022). <a class="https://doi.org/10.1093/bioinformatics/btac624" target="_blank">AEON.py: Python library for attractor analysis in asynchronous Boolean networks</a>. Bioinformatics, 38(21), 4978-4980.</li>
+        <li class="justify">Beneš, N., Brim, L., Pastva, S., & Šafránek, D. (2021, July). <a href="https://doi.org/10.1007/978-3-030-81685-8_24" target="_blank">Computing bottom SCCs symbolically using transition guided reduction</a>. In International Conference on Computer Aided Verification (pp. 505-528).</li>
+    </ul>
+</div>
+
+<!-- Just a spacer --> 
+<div style="height:100px;"></div>
+
+</body>
+
+</html> 
