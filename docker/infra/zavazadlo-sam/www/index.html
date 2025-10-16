@@ -3,40 +3,12 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <script type="text/javascript" src="/js/uikit.min.js"></script>
     <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
     <title>Sam Pastva</title>
-
-    <style type="text/css">
-        .shadow-parent {
-            filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
-            transition: all 60ms ease-out;
-        }
-        .shadow-parent:hover {
-            transform: scale(1.1);
-        }
-        .clip-circle {
-            clip-path: circle(50px at 50px 50px);
-        }
-        .header-image {
-            position: relative;
-            top: -8px;
-            left: -32px;            
-            width: 100px;
-            height: 100px;
-            clip-path: circle(50px at 50px 50px);
-        }
-        .muni {
-            font-family: 'Muni', monospace;
-            border: 1px solid black;
-            padding: 4px 12px 4px 12px;
-        }
-        .justify {
-            text-align: justify;
-        }
-    </style>
 </head>
 
 <body>
@@ -44,14 +16,20 @@
 <div class="uk-section uk-section-default">
 <div class="uk-container">
 
-<h1 class="uk-heading-large"><img src="./assets/profile.1.rotated.jpg" class="header-image">Hi! I'm Sam.</h1>
+<h1 class="uk-heading-large header-text"><img src="./assets/profile.1.rotated.jpg" class="header-image">Hi! I'm Sam.</h1>
 
-<div style="margin-left: 104px;">
+<div class="offset-content">
+    
     <p class="uk-text-lead">I am an assitant professor at <a href="https://www.fi.muni.cz/" target="_blank">FI MUNI</a> in Brno (Czechia).</p>
+    
     <p class="uk-text-large justify">I do research in <b>logic-based modeling</b> (e.g. Boolean networks) of biological processes in the <a href="https://sybila.fi.muni.cz/" target="_blank">Sybila</a> lab. We try to better understand biology by learning simple, explainable logic-based programs replicating the behavior of real <a href="https://en.wikipedia.org/wiki/Gene_regulatory_network" target="_blank">regulatory networks</a>. Our unique expertise is in building scalable <a href="https://en.wikipedia.org/wiki/Automated_reasoning" target="_blank">automated reasoning</a> methods and robust <a href="https://github.com/sybila/" target="_blank">software tools</a>.</p>
+    
     <p class="uk-text-large">I am always looking forward to meaningful connections! Get in touch at <i>sam.pastva</i>[at]<i>gmail.com</i>, or <i>xpastva</i>[at]<i>fi.muni.cz</i> and we can chat. I'm also on <a href="https://mastodon.social/@daemontus" target="_blank">Mastodon</a>, <a href="https://bsky.app/profile/daemontus.bsky.social" target="_blank">Bluesky</a> and <a href="https://www.researchgate.net/profile/Samuel-Pastva?ev=hdr_xprf" target="_blank">ResearchGate</a>.</p>
-    <p class="uk-text-large justify">At home, I've been also running my own "cloud" since 2020 (a blog post on that experience is hopefully coming soon :)) and I very much enjoy designing and 3D printing <a href="https://github.com/daemontus/home-3d-models" target="_blank">useful stuff</a>.</p>
+    
+    <p class="uk-text-large justify">As of recently, I'm trying to publish interesting stuff that I've learned on my <a href="/blog.html">blog</a>. At home, I've been running my own "cloud" since 2020 (a blog post about that is hopefully coming soon :)) and I very much enjoy designing and 3D printing <a href="https://github.com/daemontus/home-3d-models" target="_blank">useful stuff</a>.</p>
+    
     <h2>Try the software I'm building!</h2>
+    
     <p class="justify">I always try to be available to anyone who is evaluating our software for their use case. It's academic software, so it's never going to be perfect ;) If you think that something if off, or just need some pointers before you start diving in, let me know and we can work something out together.</p>
     <ul>
         <li class="justify"><a href="https://pypi.org/project/biodivine-aeon/" target="_blank"><b>AEON.py</b></a> is a comprehensive Python package for reasoning about Boolean networks using BDDs. It may not have the fastest, shiniest algorithm for every task, but in general, if you can think of a BN-related question, AEON.py can typically answer it. Thanks to the symbolic BDD-based representation, you can scale to useful network sizes even with relatively "naive" algorithms. Out of the box, we support attractor detection in asynchronous update, fixed point and trap space computation, reachability, reduction, control, and many additional features. We also support <b>partially specified Boolean networks</b> that can be used to collectively analyze large ensembles of similar networks efficiently.</li>
@@ -75,6 +53,9 @@ https://doi.org/10.48550/arXiv.2506.06013" target="_blank">Scalable Counting of 
         <li class="justify">Beneš, N., Brim, L., Huvar, O., Pastva, S., Šafránek, D., & Šmijáková, E. (2022). <a class="https://doi.org/10.1093/bioinformatics/btac624" target="_blank">AEON.py: Python library for attractor analysis in asynchronous Boolean networks</a>. Bioinformatics, 38(21), 4978-4980.</li>
         <li class="justify">Beneš, N., Brim, L., Pastva, S., & Šafránek, D. (2021, July). <a href="https://doi.org/10.1007/978-3-030-81685-8_24" target="_blank">Computing bottom SCCs symbolically using transition guided reduction</a>. In International Conference on Computer Aided Verification (pp. 505-528).</li>
     </ul>
+</div>
+
+</div>
 </div>
 
 <!-- Just a spacer --> 
