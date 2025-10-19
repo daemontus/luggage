@@ -11,3 +11,5 @@ services:
       # Configuration files
       - /root/luggage/morlor/reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
       - /root/luggage/morlor/reverse-proxy/conf.d:/etc/nginx/conf.d      
+      # Static site files (new domains need to be properly configured!)
+      - /root/luggage/morlor/www:/var/www
