@@ -3,7 +3,8 @@ name: morlor
 services:  
   reverse-proxy:
     # See https://hub.docker.com/_/nginx
-    image: 'nginx:1.29.2'
+    # See /docker/nginx-acme for details.
+    image: daemontus/nginx-acme:latest
     container_name: reverse-proxy
     restart: unless-stopped        
     network_mode: host

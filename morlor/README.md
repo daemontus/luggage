@@ -11,5 +11,6 @@ Morlor is a small VM running in Hetzner cloud responsible for routing requests f
 Right now, we don't really have an automated provisioning/setup script, because the actual setup is extremely simple:
 
  1. Create a Hetzner VM with Debian Trixie and a pre-configured SSH key.
- 2. Install `docker` based on official instructions.
- 3. Clone the `luggage` repository into the `/root` folder.
+ 2. Install basic utilities: `apt-get install git`.
+ 3. Install `docker` based on official instructions.
+ 4. Clone the `luggage` repository into the `/root` folder.
