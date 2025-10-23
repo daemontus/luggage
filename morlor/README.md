@@ -6,7 +6,7 @@ Morlor is a small VM running in Hetzner cloud responsible for routing requests f
 
 Morlor also manages all HTTPS certificates. Ideally, we would use the ACME support built into `nginx`, but we will need to share the certificates across several devices that will handle requests from federated LANs. As such, it must be possible to sync certificates to these devices, since they can't use normal provisioning.
 
-The certificates are managed by `certbot` and stored in `/root/data/letsencrypt`. To create a certificate, simply run:
+The certificates are managed by `certbot` and stored in `/root/data/letsencrypt`. Assuming `reverse-proxy` is running, to create a certificate, simply run:
 
 ```
 ./https/certificate_create.sh some.domain.com
@@ -20,13 +20,31 @@ The certificates needs to be renewed monthly, and *`nginx` needs to be restarted
 
 ## Services
 
+### Reverse proxy
 
+### Authelia
+
+Authelia is an identity provider that we use for user management. All configuration values for `authelia` are store in 1Password. To apply configuration changes, follow these steps:
+
+ * Make sure `/root/data/authelia/users.yml` is contains all user data.
+ * Make sure you are logged in to 1Password, and then run `source ./authelia/secrets.sh`.
+ * Make a backup copy of `/root/data/authelia/configuration.yml`.
+ * Finally, run the following command to refresh the configuration:
+
+```
+envsubst < ./authelia/configuration.template.yml > /root/data/authelia/configuration.yml
+```
 
 ## VM Setup
 
 Right now, we don't really have an automated provisioning/setup script, because the actual setup is extremely simple:
 
  1. Create a Hetzner VM with Debian Trixie and a pre-configured SSH key.
- 2. Install basic utilities: `apt-get install git`.
+ 2. Install basic utilities: `apt-get install git magic-wormhole zip unzip`.
  3. Install `docker` based on official instructions.
- 4. Clone the `luggage` repository into the `/root` folder.
+ 4. Install `op` (1password) using official instructions and log in (`op account add`, etc.).
+ 5. Clone the `luggage` repository into the `/root` folder.
+ 6. Prepare HTTPS certificates in `/root/data/letsencrypt`. 
+ 7. Prepare configuration and user data in `/root/data/authelia`.
+ 8. Make sure to add `certificate_renew.sh` to `crontab` (see HTTPS section).
+ 9. Create authelia configuration and import user data per instructions above.

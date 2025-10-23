@@ -1,13 +1,23 @@
 name: morlor
 
 services:  
+  authelia:
+    # See https://www.authelia.com/integration/proxies/nginx/
+    image: 'authelia/authelia:latest'
+    container_name: authelia
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      # Configuration files, database, etc.
+      - /root/data/authelia:/config
+
   reverse-proxy:
     # See https://hub.docker.com/_/nginx
     # See /docker/nginx-acme for details.
     image: 'nginx:1.29.2'
     container_name: reverse-proxy
     restart: unless-stopped        
-    network_mode: host
+    network_mode: host    
     volumes:
       # Configuration files
       - /root/luggage/morlor/reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
@@ -16,4 +26,4 @@ services:
       - /root/data/certbot:/var/www/certbot
       - /root/data/letsencrypt:/etc/nginx/ssl
       # Static site files (new domains need to be properly configured!)
-      - /root/luggage/morlor/www:/var/www      
+      - /root/luggage/morlor/www:/var/www
