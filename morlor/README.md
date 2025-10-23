@@ -12,7 +12,7 @@ The certificates are managed by `certbot` and stored in `/root/data/letsencrypt`
 ./https/certificate_create.sh some.domain.com
 ```
 
-The certificates needs to be renewed monthly, and *`nginx` needs to be restarted every time the certificate changes*. This is handled by the `certificate_renew.sh` script, which will also restart the `reverse-proxy` container. To run the script periodically, add the following cron entry (run `cron -e` to edit):
+The certificates needs to be renewed monthly, and *`nginx` needs to be restarted every time the certificate changes*. This is handled by the `certificate_renew.sh` script, which will also restart the `reverse-proxy` container. To run the script periodically, add the following cron entry (run `crontab -e` to edit):
 
 ```
 0 0 * * 1 /root/luggage/morlor/https/certificate_renew.sh
