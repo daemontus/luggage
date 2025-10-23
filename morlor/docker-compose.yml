@@ -21,7 +21,8 @@ services:
     volumes:
       # Configuration files
       - /root/luggage/morlor/reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
-      - /root/luggage/morlor/reverse-proxy/conf.d:/etc/nginx/conf.d      
+      - /root/luggage/morlor/reverse-proxy/conf.d:/etc/nginx/conf.d
+      - /root/luggage/morlor/reverse-proxy/snippets:/etc/nginx/snippets
       # HTTPS certificates
       - /root/data/certbot:/var/www/certbot
       - /root/data/letsencrypt:/etc/nginx/ssl

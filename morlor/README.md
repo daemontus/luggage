@@ -28,7 +28,7 @@ Authelia is an identity provider that we use for user management. All configurat
 
  * Make sure `/root/data/authelia/users.yml` is contains all user data.
  * Make sure you are logged in to 1Password, and then run `source ./authelia/secrets.sh`.
- * Make a backup copy of `/root/data/authelia/configuration.yml`.
+ * Make a backup copy of current `/root/data/authelia/configuration.yml` (if it exists).
  * Finally, run the following command to refresh the configuration:
 
 ```
