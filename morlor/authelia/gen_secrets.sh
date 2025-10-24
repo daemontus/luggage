@@ -12,5 +12,5 @@ echo "CLIENT_SECRET_DIGEST_SEAFILE=`op read op://TichaPosta/SECRETS_SEAFILE/OIDC
 echo "CLIENT_SECRET_DIGEST_IMMICH=`op read op://TichaPosta/SECRETS_IMMICH/OIDC_CLIENT_SECRET_DIGEST`" >> $ENV_FILE
 echo "CLIENT_SECRET_DIGEST_SYNAPSE=`op read op://TichaPosta/SECRETS_SYNAPSE/OIDC_CLIENT_SECRET_DIGEST`" >> $ENV_FILE
 
-op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key > /root/data/authelia/jwtRS256.key
-op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key.pub > /root/data/authelia/jwtRS256.key.pub
+op read op://TichaPosta/SECRETS_AUTHELIA/jwtRS256.key > /root/data/authelia/jwtRS256.key
+op read op://TichaPosta/SECRETS_AUTHELIA/jwtRS256.key.pub > /root/data/authelia/jwtRS256.key.pub

@@ -27,7 +27,7 @@ The certificates needs to be renewed monthly, and *`nginx` needs to be restarted
 Authelia is an identity provider that we use for user management. All configuration values for `authelia` are stored in 1Password (vault `Ticha posta`, item `AUTHELIA_SECRETS`). However, for redundancy, the secrets are also stored locally with the configuration files. To apply configuration changes, follow these steps:
 
  * Make sure `/root/data/authelia/users.yml` is present and contains all user data.
- * Make sure you are logged in to 1Password, and then run `./authelia/secrets.sh`. This should populate the `/root/data/authelia/secrets.env` file as well as `/root/data/authelia/jwtRS256.key`.
+ * Make sure you are logged in to 1Password (run `eval $(op signin)`), and then run `./authelia/secrets.sh`. This should populate the `/root/data/authelia/secrets.env` file as well as `/root/data/authelia/jwtRS256.key`.
  * Make a backup copy of current `/root/data/authelia/configuration.yml` (if it exists).
  * Finally, copy current `./authelia/configuration.template.yml` into `/root/data/authelia/configuration.yml` (the configuration should be automatically populated from environment variables in the `secrets.env` file).
 
