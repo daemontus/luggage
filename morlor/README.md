@@ -36,7 +36,7 @@ Authelia is an identity provider that we use for user management. All configurat
 Right now, we don't really have an automated provisioning/setup script, because the actual setup is extremely simple:
 
  1. Create a Hetzner VM with Debian Trixie and a pre-configured SSH key.
- 2. Install basic utilities: `apt-get install git magic-wormhole zip unzip`.
+ 2. Install basic utilities: `apt-get install git magic-wormhole zip unzip btop`.
  3. Install `tailscale` using official instructions, run it as exit node with stateful filtering.
  	* `tailscale up --advertise-exit-node --stateful-filtering=false`
  	* Resolve any "performance recommendations" using provided links (if any).
