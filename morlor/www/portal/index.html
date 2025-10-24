@@ -1,0 +1,358 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/uikit.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script type="text/javascript" src="/js/uikit.min.js"></script>
+    <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
+    <title>Portal @unsigned-short.com</title>
+
+    <style type="text/css">
+        .shadow-parent {
+            filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+            transition: all 60ms ease-out;
+        }
+        .shadow-parent:hover {
+            transform: scale(1.1);
+        }
+        .clip-circle {
+            clip-path: circle(50px at 50px 50px);
+        }
+    </style>
+
+    <script type="text/javascript">
+        function check(element, url) {
+            console.log(element);
+            
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4) {
+                    console.log(element);
+                    element.classList.remove("uk-button-primary", "uk-button-secondary", "uk-button-danger")
+                    if (xmlHttp.status == 200) {
+                        element.classList.add("uk-button-primary");
+                        element.innerHTML = "Response ok";
+                    } else if (xmlHttp.status != 0) {
+                        element.classList.add("uk-button-danger");
+                        element.innerHTML = "Response error";
+                    } else {
+                        element.classList.add("uk-button-secondary");
+                        element.innerHTML = "No response";
+                    }
+                    console.log(xmlHttp);
+                    console.log(xmlHttp.status)
+                }
+            }
+            xmlHttp.open("GET", url, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="uk-section uk-section-default">
+<div class="uk-container">
+
+<h1 class="uk-heading-large">Portal <small>@unsigned-short.com</small></h1>
+
+<div uk-grid>
+    <div class="uk-width-2-3">
+        <p class="uk-text-justify">This page links to all services that are running on <code>unsigned-short.com</code>. Most should be available assuming you are logged in using <code>auth.unsigned-short.com</code>, some may require further authentication though.</p>
+        <p class="uk-text-justify">Note that <code>unsigned-short.com</code> runs on two computers, but only <code>zavazadlo</code> is online 24/7; <code>mystery-shack</code> needs to be turned on/off manually. In the future, I'd like to add up-to-date load statistics for both computers and a remote on/off switch for <code>mystery-shack</code>, but that's a bit trickier to implement, so here is just the HW list for now.</p>
+    </div>
+    <div class="uk-width-1-3 uk-text-center">
+        <a href="https://wiki.lspace.org/The_Luggage" target="_blank"><img src="https://wiki.lspace.org/images/9/97/Luggage.jpg?20211021021254" width="180"></a> 
+    </div>
+
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-small">
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Server <code style="font-size: 1em;">zavazadlo</code></h3>
+                <ul>
+                    <li>i7 4790 (4 cores, 3.6Ghz); iGPU</li>
+                    <li>32GB DDR3 1333</li>
+                    <li>11TB of parity-backed HDD storage</li>
+                    <li>480GB of mirrored SSD storage</li>
+                    <li>500Mbit down, 100Mbit up</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-small">
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Desktop <code style="font-size: 1em;">mystery-shack</code></h3>
+                <ul>
+                    <li>Ryzen 5800X (8 cores, 4.7Ghz)</li>
+                    <li>128GB DDR4 3200</li>
+                    <li>1TB+2TB of non-redundant SSD</li>
+                    <li>GTX 1080ti (11GB) and Radeon W6600 (8GB)</li>
+                    <li>100Mbit down, 50Mbit up</li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>
+
+</div>
+</div>
+
+<div class="uk-section uk-section-primary uk-margin-top uk-margin-bottom">
+    <div class="uk-container">
+        <span class="uk-heading-small uk-margin-right" style="position: relative; top: 15px;">Apps:</span>
+
+        <a class="uk-button shadow-parent" href="https://plex.unsigned-short.com" target="_blank"><img src="assets/plex.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://seafile.unsigned-short.com" target="_blank"><img src="assets/seafile.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://download.unsigned-short.com" target="_blank"><img src="assets/download.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://immich.unsigned-short.com" target="_blank"><img src="assets/immich.png" width="100" class="clip-circle"></a>
+        <a class="uk-button shadow-parent" href="https://files.unsigned-short.com" target="_blank"><img src="assets/filebrowser.svg" width="100" class="clip-circle"></a>
+    </div>
+</div>
+
+<div class="uk-section uk-section-muted uk-margin-top uk-margin-bottom">
+    <div class="uk-container">
+        <h2>Software running on <code style="font-size: 1em;">zavazadlo</code></h2>
+        <div uk-grid>
+            <!--<div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Cell Oracle</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://morris-lab.github.io/CellOracle.documentation/" target="_blank">Cell Oracle</a> is a Python library for in silico gene perturbation analysis using single-cell omics data and gene regulatory network models.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="https://celloracle.software.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://celloracle.software.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>-->
+
+            <!--<div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">STREAM</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/pinellolab/STREAM" target="_blank">STREAM</a> is an interactive pipeline capable of disentangling and visualizing complex branching trajectories from both single-cell transcriptomic and epigenomic data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://stream.software.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://stream.software.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>-->
+
+            <!--<div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">MTLRank</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/alexQiSong/MTLRank" target="_blank">MTLRank</a> is a multi-task learning based framework for inferring regulatory interactions from single cell data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://mtlrank.software.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://mtlrank.software.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="uk-section uk-section-muted uk-margin-top uk-margin-bottom">
+    <div class="uk-container">
+        <h2>Software running on <code style="font-size: 1em;">mystery-shack</code></h2>
+        <div uk-grid>
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Cell Oracle</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://morris-lab.github.io/CellOracle.documentation/" target="_blank">Cell Oracle</a> is a Python library for in silico gene perturbation analysis using single-cell omics data and gene regulatory network models.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="https://celloracle.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://celloracle.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">STREAM</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/pinellolab/STREAM" target="_blank">STREAM</a> is an interactive pipeline capable of disentangling and visualizing complex branching trajectories from both single-cell transcriptomic and epigenomic data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://stream.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://stream.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">SCENIC+</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://scenicplus.readthedocs.io/en/latest/" target="_blank">SCENIC+</a> is a Python package for building gene regulatory networks (GRNs) using combined or separate scRNA-seq and scATAC-seq data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://scenic.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://scenic.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">scBoolSeq</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/bnediction/scBoolSeq" target="_blank">scBoolSeq</a> is a Python package for binarisation and synthetic generation of scRNA-seq data from Boolean dynamics.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://scboolseq.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://scboolseq.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">GENIE3</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/vahuynh/GENIE3" target="_blank">GENIE3</a> is a Python machine learning-based package for the inference of gene regulatory networks from expression data.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://genie3.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://genie3.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">GPU VS Code</h3>
+                        <p class="uk-text-justify">
+                            A virtual machine running a VS Code instance connected to the 1080 Ti GPU with CUDA enabled. This is usually turned off by default.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://gpu.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://gpu.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">AEON.py</h3>
+                        <p class="uk-text-justify">
+                            <a href="https://github.com/sybila/biodivine-aeon-py" target="_blank">AEON</a> is a tool for exhaustive symbolic analysis of (partially specified) Boolean networks.
+                        </p>
+
+                        <a class="uk-button uk-button-default" href="https://aeon.mystery-shack.unsigned-short.com/" target="_blank">Open</a>
+                        <button class="uk-button uk-button-default" onclick="check(this, 'https://aeon.mystery-shack.unsigned-short.com/')" >Status</button>
+                    </div>
+                </div>  
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="uk-section uk-section-muted uk-margin-top uk-margin-bottom">
+    <div class="uk-container">
+        <h2>Management software</h2>
+        <p>These services are only accessible through a Tailscale VPN. If you don't have VPN credentials, this is not for you :) 
+        Credentials for individual services are available in the shared 1Password vault.</p>
+        <div uk-grid>
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">OpenWRT@kokoska</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the main OpenWRT router that is running on <code>kokoska</code> in Brno.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://kokoska/" target="_blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">TPLink@kokoska</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the WiFi hotspots that are connected to <code>kokoska</code> in Brno.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="https://kokoska:8043/" target="_blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Unraid@zavazadlo</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the Unraid OS on <code>zavazadlo</code> in Bratislava.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://zavazadlo/" target="_blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Proxmox@mystery-shack</h3>
+                        <p class="uk-text-justify">
+                            Management interface for the Proxmox OS on <code>mystery-shack</code> in Brno.
+                            Use this link to manage virtual machines running on <code>mystery-shack</code>.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://mystery-shack-proxmox:8006/" target="_blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">docker@mystery-shack</h3>
+                        <p class="uk-text-justify">
+                            Online VS Code instance running directly on the <code>mystery-shack-docker</code> virtual machine in Brno.
+                            Use this link to manage the docker containers running on <code>mystery-shack</code> and build new images.
+                        </p>                        
+
+                        <a class="uk-button uk-button-default" href="http://mystery-shack-docker:8000/" target="_blank">Open</a>
+                        <!--<button class="uk-button uk-button-default" onclick="check(this, 'http://kokoska/')" >Status</button>-->
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Just a spacer --> 
+<div style="height:100px;"></div>
+
+</body>
+
+</html> 
