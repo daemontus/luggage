@@ -7,6 +7,11 @@ services:
     container_name: authelia
     restart: unless-stopped
     network_mode: host
+    environment:
+      # Enables template replacement in the configuration file.
+      X_AUTHELIA_CONFIG_FILTERS: 'template'
+      X_AUTHELIA_CONFIG: '/config/configuration.yml'
+    env_file: '/root/data/authelia/secrets.env'
     volumes:
       # Configuration files, database, etc.
       - /root/data/authelia:/config
