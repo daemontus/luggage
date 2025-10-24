@@ -1,16 +1,16 @@
 #!/bin/bash
 
-ENV_FILE = '/root/data/authelia/secrets.env'
+ENV_FILE='/root/data/authelia/secrets.env'
 echo "" > $ENV_FILE
 
-echo "AUTHELIA_JWT_SECRET=`op read op://TichaPosta/AUTHELIA_SECRETS/JWT_SECRET`" >> $ENV_FILE
-echo "AUTHELIA_SESSION_SECRET=`op read op://TichaPosta/AUTHELIA_SECRETS/SESSION_SECRET`" >> $ENV_FILE
-echo "AUTHELIA_STORAGE_KEY=`op read op://TichaPosta/AUTHELIA_SECRETS/STORAGE_KEY`" >> $ENV_FILE
-echo "AUTHELIA_SMTP_PASSWORD=`op read op://TichaPosta/AUTHELIA_SECRETS/SMTP_PASSWORD`" >> $ENV_FILE
-echo "AUTHELIA_OIDC_HMAC_SECRET=`op read op://TichaPosta/AUTHELIA_SECRETS/OIDC_HMAC_SECRET`" >> $ENV_FILE
-echo "AUTHELIA_CLIENT_SECRET_SEAFILE=`op read op://TichaPosta/AUTHELIA_SECRETS/CLIENT_SECRET_SEAFILE`" >> $ENV_FILE
-echo "AUTHELIA_CLIENT_SECRET_IMMICH=`op read op://TichaPosta/AUTHELIA_SECRETS/CLIENT_SECRET_IMMICH`" >> $ENV_FILE
-echo "AUTHELIA_CLIENT_SECRET_SYNAPSE=`op read op://TichaPosta/AUTHELIA_SECRETS/CLIENT_SECRET_SYNAPSE`" >> $ENV_FILE
+echo "JWT_SECRET=`op read op://TichaPosta/SECRETS_AUTHELIA/JWT_SECRET`" >> $ENV_FILE
+echo "SESSION_SECRET=`op read op://TichaPosta/SECRETS_AUTHELIA/SESSION_SECRET`" >> $ENV_FILE
+echo "STORAGE_KEY=`op read op://TichaPosta/SECRETS_AUTHELIA/STORAGE_KEY`" >> $ENV_FILE
+echo "SMTP_PASSWORD=`op read op://TichaPosta/SECRETS_AUTHELIA/SMTP_PASSWORD`" >> $ENV_FILE
+echo "OIDC_HMAC_SECRET=`op read op://TichaPosta/SECRETS_AUTHELIA/OIDC_HMAC_SECRET`" >> $ENV_FILE
+echo "CLIENT_SECRET_DIGEST_SEAFILE=`op read op://TichaPosta/SECRETS_SEAFILE/OIDC_CLIENT_SECRET_DIGEST`" >> $ENV_FILE
+echo "CLIENT_SECRET_DIGEST_IMMICH=`op read op://TichaPosta/SECRETS_IMMICH/OIDC_CLIENT_SECRET_DIGEST`" >> $ENV_FILE
+echo "CLIENT_SECRET_DIGEST_SYNAPSE=`op read op://TichaPosta/SECRETS_SYNAPSE/OIDC_CLIENT_SECRET_DIGEST`" >> $ENV_FILE
 
-echo `op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key` > /root/data/authelia/jwtRS256.key
-echo `op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key.pub` > /root/data/authelia/jwtRS256.key.pub
+op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key > /root/data/authelia/jwtRS256.key
+op read op://TichaPosta/AUTHELIA_SECRETS/jwtRS256.key.pub > /root/data/authelia/jwtRS256.key.pub

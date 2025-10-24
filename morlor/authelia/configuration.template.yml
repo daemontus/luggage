@@ -333,7 +333,7 @@ identity_validation:
     # jwt_algorithm: 'HS256'
 
     ## The secret key used to sign and verify the JWT.
-    jwt_secret: '${AUTHELIA_JWT_SECRET}'
+    jwt_secret: '{{ env "JWT_SECRET" }}'
 
   ## Elevated Session flows. Adjusts the flow which require elevated sessions for example managing credentials, adding,
   ## removing, etc.
@@ -667,7 +667,7 @@ access_control:
 session:
   ## The secret to encrypt the session data. This is only used with Redis / Redis Sentinel.
   ## Secret can also be set using a secret: https://www.authelia.com/c/secrets
-  secret: '{{ env "AUTHELIA_SESSION_SECRET" }}'
+  secret: '{{ env "SESSION_SECRET" }}'
 
   ## Cookies configures the list of allowed cookie domains for sessions to be created on.
   ## Undefined values will default to the values below.
@@ -767,7 +767,7 @@ storage:
   ## The encryption key that is used to encrypt sensitive information in the database. Must be a string with a minimum
   ## length of 20. Please see the docs if you configure this with an undesirable key and need to change it, you MUST use
   ## the CLI to change this in the database if you want to change it from a previously configured value.
-  encryption_key: '{{ env "AUTHELIA_STORAGE_KEY" }}'
+  encryption_key: '{{ env "STORAGE_KEY" }}'
 
   ##
   ## Local (Storage Provider)
@@ -813,7 +813,7 @@ notifier:
 
     ## The password used for SMTP authentication.
     ## Can also be set using a secret: https://www.authelia.com/c/secrets
-    password: '{{ env "AUTHELIA_SMTP_PASSWORD" }}'
+    password: '{{ env "SMTP_PASSWORD" }}'
 
     ## The sender is used to is used for the MAIL FROM command and the FROM header.
     ## If this is not defined and the username is an email, we use the username as this value. This can either be just
@@ -850,7 +850,7 @@ identity_providers:
   oidc:
     ## The hmac_secret is used to sign OAuth2 tokens (authorization code, access tokens and refresh tokens).
     ## HMAC Secret can also be set using a secret: https://www.authelia.com/c/secrets
-    hmac_secret: '{{ env "AUTHELIA_OIDC_HMAC_SECRET" }}'
+    hmac_secret: '{{ env "OIDC_HMAC_SECRET" }}'
 
     ## The JWK's issuer option configures multiple JSON Web Keys. It's required that at least one of the JWK's
     ## configured has the RS256 algorithm. For RSA keys (RS or PS) the minimum is a 2048 bit key.
@@ -950,7 +950,7 @@ identity_providers:
     clients:    
       - client_id: 'seafile'
         client_name: 'Seafile'
-        client_secret: '{{ env "AUTHELIA_CLIENT_SECRET_SEAFILE" }}'
+        client_secret: '{{ env "CLIENT_SECRET_DIGEST_SEAFILE" }}'
         public: false
         authorization_policy: 'two_factor'
         redirect_uris:
@@ -964,7 +964,7 @@ identity_providers:
         token_endpoint_auth_method: 'client_secret_basic'
       - client_id: 'immich'
         client_name: 'Immich'
-        client_secret: '{{ env "AUTHELIA_CLIENT_SECRET_IMMICH" }}'
+        client_secret: '{{ env "CLIENT_SECRET_DIGEST_IMMICH" }}'
         public: false
         authorization_policy: 'two_factor'
         redirect_uris:
@@ -980,7 +980,7 @@ identity_providers:
         token_endpoint_auth_method: 'client_secret_basic'
       - client_id: 'synapse'
         client_name: 'Synapse'
-        client_secret: '{{ env "AUTHELIA_CLIENT_SECRET_SYNAPSE" }}'
+        client_secret: '{{ env "CLIENT_SECRET_DIGEST_SYNAPSE" }}'
         public: false
         authorization_policy: 'two_factor'
         redirect_uris:
