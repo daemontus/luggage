@@ -37,7 +37,10 @@ Right now, we don't really have an automated provisioning/setup script, because 
 
  1. Create a Hetzner VM with Debian Trixie and a pre-configured SSH key.
  2. Install basic utilities: `apt-get install git magic-wormhole zip unzip`.
- 3. Install `docker` based on official instructions.
+ 3. Install `tailscale` using official instructions, run it as exit node with stateful filtering.
+ 	* `tailscale up --advertise-exit-node --stateful-filtering=false`
+ 	* Resolve any "performance recommendations" using provided links (if any).
+ 3. Install `docker` using official instructions.
  4. Install `op` (1password) using official instructions and log in (`op account add`, etc.).
  5. Clone the `luggage` repository into the `/root` folder.
  6. Prepare HTTPS certificates in `/root/data/letsencrypt`. 
