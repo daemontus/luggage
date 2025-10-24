@@ -956,6 +956,9 @@ identity_providers:
         redirect_uris:
           # Testing url: https://openidconnect.net/callback
           - 'https://seafile.unsigned-short.com/oauth/callback/'        
+        response_types: 
+          - 'code'
+          - 'token'
         scopes:
           - 'openid'
           - 'email'
@@ -976,6 +979,9 @@ identity_providers:
           - 'openid'
           - 'email'
           - 'profile'
+        response_types: 
+          - 'code'
+          - 'token'
         userinfo_signed_response_alg: 'none'
         token_endpoint_auth_method: 'client_secret_basic'
       - client_id: 'synapse'
