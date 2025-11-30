@@ -1,38 +1,31 @@
+## Initial setup
+
+ - Set hostname to `kokoska` in "System".
+ - Set root password and add SSH keys in "Administration". Test that SSH access works.
+ - Set up static DHCP: 	
+ 	- AC:15:A2:4A:91:DE (Obyvacka.lan) | 192.168.2.100
+ 	- 9C:53:22:4D:D7:88 (Izba.lan) | 192.168.2.101 	
+ 	- 08:F9:E0:56:A4:9C (prusa-mk4.lan) | 192.168.2.135
+ - Setup `tailscale` using the [official guide](https://openwrt.org/docs/guide-user/services/vpn/tailscale/start). Make sure to disable expiry and run with `tailscale up --advertise-exit-node --stateful-filtering=false`.
+ - Configure the IPv6 settings:
+ 	- IPv6 static address: 2001:4de8:fa2b::4:645:2/112
+ 	- IPv6 gateway: 2001:4de8:fa2b::4:645:1
+ 	- IPv6 routed prefix: 2001:4de8:fa2b:1080::/60
+ 	- DNS: 2606:4700:4700::1111 (Cloudflare) / 2001:4860:4860::8888 (Google) 	
+
 ## Omada controller
 
-To run the controller, use:
+To run the controller, use the provided `docker-compose.yml` file (`docker compose up -d`). For the sake of simplicity, the compose file is just copied to the router at this point (without cloning the whole repository).
+
+To upgrade the controller, update the version in the `docker-compose.yml` file (ALWAYS CHECK THE REPOSITORY FOR BREAKING CHANGES) and then run:
 
 ```
-docker run -d \
-  --name omada-controller \
-  --restart unless-stopped \
-  --ulimit nofile=4096:8192 \
-  --net host \
-  -e MANAGE_HTTP_PORT=8088 \
-  -e MANAGE_HTTPS_PORT=8043 \
-  -e PGID="508" \
-  -e PORTAL_HTTP_PORT=8088 \
-  -e PORTAL_HTTPS_PORT=8843 \
-  -e PORT_ADOPT_V1=29812 \
-  -e PORT_APP_DISCOVERY=27001 \
-  -e PORT_DISCOVERY=29810 \
-  -e PORT_MANAGER_V1=29811 \
-  -e PORT_MANAGER_V2=29814 \
-  -e PORT_TRANSFER_V2=29815 \
-  -e PORT_RTTY=29816 \
-  -e PORT_UPGRADE_V1=29813 \
-  -e PUID="508" \
-  -e SHOW_SERVER_LOGS=true \
-  -e SHOW_MONGODB_LOGS=false \
-  -e SSL_CERT_NAME="tls.crt" \
-  -e SSL_KEY_NAME="tls.key" \
-  -e TZ=Etc/UTC \
-  -v omada-data:/opt/tplink/EAPController/data \
-  -v omada-logs:/opt/tplink/EAPController/logs \
-  mbentley/omada-controller:5.15
+docker-compose pull
+docker-compose up --force-recreate --build -d
+docker image prune -f
 ```
 
-To upgrade the controller, find the ID of the container through `docker ps`. Then run `docker stop -t 360 $ID` and `docker rm $ID`. Then update the version in the command above and run it (or consult the container documentation to see if there are any new steps you need to take before you upgrade).
+Once the controller is running, make sure to enable [fast roaming](https://www.tp-link.com/us/support/faq/4304/).
 
 ## Power spec
 
