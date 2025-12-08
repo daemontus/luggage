@@ -34,3 +34,13 @@ services:
       - /root/data/letsencrypt:/etc/nginx/ssl
       # Static site files (new domains need to be properly configured!)
       - /root/luggage/morlor/www:/var/www
+
+  canvas-socket:
+    image: 'daemontus/canvas-socket-server'
+    container_name: canvas-socket
+    restart: always
+    environment:
+      - RUST_LOG=info
+    ports:
+      - "9000:9000"
+
