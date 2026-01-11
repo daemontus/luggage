@@ -135,3 +135,15 @@ force user = sharing
 ```
 
 Finally, restart samba service: `service samba4 restart`.
+
+## Setting up offsite backup
+
+1. Setup SSH access to zavazadlo as `root`.
+2. Make sure to install `rsync` and `python3`.
+3. Add the following script to `crontab` (can be also done in the UI):
+
+```
+0 3 * * 0 root python3 /mnt/hdd/backups/zavazadlo.py >> /mnt/hdd/backups/zavazadlo.log 2>&1
+```
+
+Of course, this requires the HDD to be already mounted and working. Plus the backup script (`zavazadlo.py`) must already be present.
