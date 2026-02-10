@@ -57,6 +57,8 @@ services:
       - synapse-net
     environment:
       - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+    depends_on:
+      - authelia
     volumes:
       # For now, we will save everything to appdata; 
       # if it gets too big, we can always move it...
