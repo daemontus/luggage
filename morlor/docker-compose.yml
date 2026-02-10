@@ -44,3 +44,151 @@ services:
     ports:
       - "9000:9000"
 
+  # Matrix services
+
+  synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    # Since synapse does not retry to connect to the database, restart upon
+    # failure
+    restart: unless-stopped
+    # See the readme for a full documentation of the environment settings
+    # NOTE: You must edit homeserver.yaml to use postgres, it defaults to sqlite
+    networks:
+      - synapse-net
+    environment:
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+    volumes:
+      # For now, we will save everything to appdata; 
+      # if it gets too big, we can always move it...
+      - /root/data/matrix/data:/data
+      - /root/data/matrix/mautrix-telegram:/mautrix-telegram
+      - /root/data/matrix/mautrix-meta:/mautrix-meta
+      - /root/data/matrix/mautrix-discord:/mautrix-discord
+      - /root/data/matrix/mautrix-slack:/mautrix-slack
+      - /root/data/matrix/mautrix-signal:/mautrix-signal
+      - /root/data/matrix/mautrix-whatsapp:/mautrix-whatsapp
+      # .. or you may split this between different storage points
+      # - ./files:/data
+      # - /path/to/ssd:/data/uploads
+      # - /path/to/large_hdd:/data/media
+    depends_on:
+      - synapse-db
+    ports:
+      - 8008:8008/tcp
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: '8G'
+
+  synapse-db:
+    image: docker.io/postgres:15-alpine
+    # Change that password, of course!
+    networks:
+      - synapse-net
+    environment:
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=${SYNAPSE_DB_PASSWORD}
+      # ensure the database gets created correctly
+      # https://element-hq.github.io/synapse/latest/postgres.html#set-up-database
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - /root/data/matrix/db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '4G'
+
+  mautrix-telegram:
+    image: dock.mau.dev/mautrix/telegram:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-telegram:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-meta:
+    image: dock.mau.dev/mautrix/meta:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-meta:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-discord:
+    image: dock.mau.dev/mautrix/discord:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-discord:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-slack:
+    image: dock.mau.dev/mautrix/slack:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-slack:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-signal:
+    image: dock.mau.dev/mautrix/signal:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-signal:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-whatsapp:
+    image: dock.mau.dev/mautrix/whatsapp:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-whatsapp:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+networks:
+  synapse-net:
