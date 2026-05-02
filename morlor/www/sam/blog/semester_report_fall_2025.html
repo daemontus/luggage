@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <script type="text/javascript" src="/js/uikit.min.js"></script>
     <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <title>(Fall 2025) What I do as an assistant professor</title>
     <style>
         p, li {
@@ -179,6 +180,147 @@ it covers a large part of my summer holiday as well as Christmas. It
 also includes 4 national holidays and 4 sick days. As we'll see, this
 does not really affect the overall calculation that much, though.
 </p>
+
+<p>For anyone impatient, here is first a breakdown for this semester.</p>
+
+<!-- Chart Container -->
+<div class="uk-margin-large-top uk-margin-large-bottom">
+    <h3 class="uk-text-center">Visualized: Semester Time Breakdown</h3>    
+    <div id="treemap-chart"></div>
+</div>
+
+<!-- Chart Script -->
+<script>
+  var options = {
+    series:[
+      // --- SCIENCE ---
+      {
+        name: 'Science: Papers & Projects',
+        data:[
+          { x: 'Biomarkers/Trap Spaces', y: 90 },
+          { x: 'BAss Project', y: 78 },
+          { x: 'Upcoming Project A', y: 39 },
+          { x: 'SMT Project', y: 26 },
+          { x: 'Sketchbook', y: 18 },
+          { x: 'Control-Guided', y: 11 },
+          { x: 'Upcoming Project B', y: 10 },
+          { x: 'Upcoming Project C', y: 7 },
+          { x: 'Upcoming Project D', y: 2 }
+        ]
+      },
+      {
+        name: 'Science: Other Activity',
+        data:[
+          { x: 'Grant Proposal', y: 44 },
+          { x: 'CMSB Conference', y: 35 },
+          { x: 'Exploratory Exp.', y: 34 },
+          { x: 'Exploratory Meetings', y: 33 },
+          { x: 'Reviewing Papers', y: 13 },
+          { x: 'Talk Prep', y: 7 }
+        ]
+      },
+
+      // --- TEACHING & ADVISING ---
+      {
+        name: 'Teaching: Courses',
+        data:[
+          { x: 'PV252 Prep', y: 78 },
+          { x: 'PV252 Teaching', y: 56 },
+          { x: 'PV252 Grading', y: 38 },
+          { x: 'IB111 Teaching', y: 24 },
+          { x: 'PV252 Admin', y: 19 },
+          { x: 'Other Courses', y: 19 },
+          { x: 'PV252 HW', y: 16 },
+          { x: 'IB111 Prep', y: 15 }
+        ]
+      },
+      {
+        name: 'Teaching: Students & Theses',
+        data:[
+          { x: 'Thesis Meetings', y: 76 },
+          { x: 'PhD Meetings', y: 32 },
+          { x: 'Thesis Overhead', y: 26 }
+        ]
+      },
+
+      // --- ADMINISTRATION ---
+      {
+        name: 'Admin: General / Faculty',
+        data:[
+          { x: 'Emails', y: 136 },
+          { x: 'Planning/Overhead', y: 20 },
+          { x: 'Admin Tasks', y: 17 },
+          { x: 'Dept Meetings', y: 12 },
+          { x: '1-on-1s', y: 9 },
+          { x: 'Outreach', y: 8 }
+        ]
+      },
+      {
+        name: 'Admin: Lab Infrastructure',
+        data:[
+          { x: 'Biodivine Codebase', y: 42 },
+          { x: 'BBM Repo', y: 28 },
+          { x: 'Utility Libs', y: 28 },
+          { x: 'Lab Infra.', y: 28 },
+          { x: 'Lab Social', y: 20 },
+          { x: 'Lab Seminar', y: 15 },
+          { x: 'Lab Travel', y: 13 }
+        ]
+      }
+    ],
+    legend: {
+      show: true,
+      position: 'top',
+      fontSize: '14px',
+      fontWeight: 'bold',
+      markers: {
+        radius: 2 
+      }
+    },
+    chart: {
+      height: 700, 
+      type: 'treemap',
+      fontFamily: 'inherit', 
+      toolbar: { show: false }
+    },
+    // 6 distinct colors for the 6 series
+    colors:[
+      '#1E88E5', // Blue (Science: Papers & Projects)
+      '#8E24AA', // Purple (Science: Other Activity)
+      '#43A047', // Green (Teaching: Courses)
+      '#00ACC1', // Cyan (Teaching: Students & Theses)
+      '#E53935', // Red (Admin: General / Faculty)
+      '#FB8C00'  // Orange (Admin: Lab Infrastructure)
+    ], 
+    plotOptions: {
+      treemap: {
+        enableShades: true,
+        shadeIntensity: 0.2, 
+        distributed: false
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '13px',
+      },
+      formatter: function(text, op) {
+        return [text, op.value + 'h']
+      }
+    },
+    tooltip: {
+      y: {
+        formatter: function(value) {
+          return value + ' hours'
+        }
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#treemap-chart"), options);
+  chart.render();
+</script>
+
 
 <h3 id="administration">Administration</h3>
 <p>It is quite complicated to classify specific tasks as
@@ -361,6 +503,7 @@ Nevertheless, the results do seem promising, so at least for now, it seems the
 effort is paying off. Also, as expected, projects with many collaborators have
 a lot of overhead compared to smaller, more focused tasks.
 </p>
+
 <h2 id="wrapping-up">Wrapping up</h2>
 <p>
 The first important observation is that last semester, my average work week had one 
