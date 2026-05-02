@@ -1,0 +1,384 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXWG3GFG8B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZXWG3GFG8B');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script type="text/javascript" src="/js/uikit.min.js"></script>
+    <script type="text/javascript" src="/js/uikit-icons.min.js"></script>
+    <title>(Fall 2025) What I do as an assistant professor</title>
+    <style>
+        p, li {
+            text-align: justify;
+        }        
+    </style>
+
+</head>
+<body>
+
+<nav class="uk-navbar-container">
+    <div class="uk-container">
+        <div uk-navbar>
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">                    
+                    <li><a href="/">[About me]</a></li>                    
+                    <li><a href="/blog.html">[List of articles]</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="uk-section uk-section-default">
+<div class="uk-container">
+</article>
+<h1 id="semester-in-review-spring-2025">What I do as an assistant professor (Fall 2025)</h1>
+
+<p class="uk-text-lead">A brief summary of my activity and lessons learned as an
+<em>assistant professor</em> of computer science at <a
+href="https://www.fi.muni.cz/">FI MUNI</a> during the fall semester
+of 2025.</p>
+
+<blockquote>
+<p>Disclaimer: This report can be interpreted in many ways. If your
+takeaway is “wow, this guy is working too much” or “wow, this guy is not
+nearly working enough”, that’s not productive feedback, keep that to
+yourself :) Also, don’t compare yourself to other people too much.
+Everybody’s situation is different. With that said, if you do actually
+have some constructive input on how to improve my time management (i.e., “wow, 
+this guy should really be working on X instead of Y”), I’m all ears.</p>
+</blockquote>
+
+<h4 id="foreword">Foreword</h4>
+
+<p>
+I described my tracking methodology and general objectives in my 
+<a href="./semester_report_spring_2025.html">first article</a>. 
+In case you haven't seen it, a brief summary: I try to objectively
+track the tasks that I work on during the day, but for the sake of
+my own sanity, it is only a rough esitmate (~15-minute granularity).
+As such, many smaller tasks get lumped together into larger "catch all"
+categories or end up missing completely. The report covers <em>17.08.2025 
+- 15.02.2026</em>, i.e. almost exactly 6 months. My expected <em>work
+distribution</em> is roughly <em>40/40/20</em> between teaching, research 
+and "admin". With ~2 weeks of vacation and 3-4 state holidays, this accounts
+for 340h of teaching, 340h of research and 170h of "admin".
+</p>
+
+<p>
+In the original article, I also discuss salary a bit. Here, the situation 
+has not changed much, so I will only touch on it briefly. Over the past year,
+my salary increased to ~88k CZK / month, amounting to ~550 CZK / hour. 
+However, I logged more than 1200 hours of "work" over the past 
+semester, which is 1.4x the "expected value". As such, my "effective
+salary" is closer to ~390 CZK / hour, or ~63k CZK / month. As we'll see,
+this semester I managed to do a bit more science compared to the last one, 
+so I guess the "overtime" is somewhat acceptable, but ultimately I was also
+bogged down quite a bit in various "admin" tasks.
+</p>
+
+<h2 id="lessons-learned">Lessons learned</h2>
+<p>
+This semester, I'd like to start with lessons learned, because it is probably
+the more interesting part in the long-term.
+</p>
+<ul>
+    <li>
+    <strong>Theses</strong> I wanted to prepare some "practical guidelines" for 
+    thesis writing and advising, because last semester I noticed that <em>a lot 
+    of students struggle with writing the thesis text</em>. I did not have time 
+    to do this yet, but I want to highlight it here, because it is still an 
+    ongoing problem. It also affects me as an advisor, because I end up spending 
+    a lot of time on repetitive, avoidable tasks. As many have noted,
+    LLMs "help" with this, but are only useful if you can already identify and 
+    describe what makes text "high quality".
+    </li>
+    <li>
+    <strong>Grading</strong> A similar takeaway could be said about grading and 
+    examination in terms of frontend software engineering courses in our program. 
+    We have some objective criteria, but they are loosely defined and hard to enforce. 
+    <em>We would very much benefit from a document that cearly establishes "a passing 
+    grade software engineer must know at least X".</em> Not eveything can be formalized, 
+    but some baseline is necessary.
+    </li>
+    <li>
+    <strong>Student use of LLMs</strong> Because I mostly interact with master students,
+    my view of LLMs is perhaps a bit unexpected: <em>I believe students are not using LLMs
+    (well) enough.</em> At the moment, most students can "chat" with an LLM, and they can 
+    paste an assignment into an LLM to get some passable solution, but (so far) they very 
+    rarely use LLMs to do actual quality control, automation, or complex planning (e.g.,
+    despite LLMs being very popular, we still get a ton of submissions with trivial mistakes
+    that "review this" prompt would identify immediately). Some students use LLMs reasonably
+    well for complex, multi-step coding tasks, but this is still a minority. In my opinion, 
+    more challenging and comprehensive assignments are needed, but this also complicates 
+    other steps of the teaching process.
+    </li>
+    <li>
+    <strong>My personal LLM workflow</strong> Since spring, I use LLMs heavily for coding,
+    but my work is mostly divided into two types of tasks now: <em>Mission critical code,
+    which I still write and test mostly manually, and various "auxiliary" tasks that can 
+    be safely delegated and don't require in depth understanding (or have simple but exact
+    specification that the LLM can access).</em>
+    Here, I find that frontier models can be helpful, but are unnecessary for most 
+    tasks, assuming your planning and validation loop is robust 
+    (and your project isn't a mess).
+    Where frontier models with grounding are absolutely necessary is any kind of "deep
+    research". Here, smaller models hallucinate too much. Large reasoning models can
+    catch many hallucinations via introspection and by comparing with real-world
+    references. 
+    I also use LLMs to review most of the text I publish. <em>LLMs can now (mostly) update 
+    text while preserving my personal style.</em> Furthermore, LLMs are now very good at 
+    checking non-trivial math and proofs. They are not perfect (review is still 
+    necessary), but they catch issues that I would normally spend much 
+    more time on.
+    </li>
+    <li>
+    <strong>
+    My (somewhat depressing) takeway is that <em>on average</em>, spending 20-40h advising 
+    a student on their bachelor or master thesis is mostly pointless, unless that student 
+    has non-trivial potential to become a contributor in your lab, or a tutor in 
+    your course. In any other situation, you can get more, higher quality output by 
+    spending that same amount of time working with a good LLM.
+    </strong> 
+    That does not mean tutoring students is pointless now, it just means the previous value
+    proposition of "I supervise a topic and the student helps me explore it" is no longer there,
+    unless the student is significantly above average, or has potential to contribute in
+    other aspects beyond the thesis.
+    </li>
+    <li>
+    Another negative observation is that given my current occupation, 
+    I practically no longer read or write for fun. I still code "for fun" a little bit,
+    but the idea of "relaxing by reading" is now quite alien to me.
+    </li>
+    <li>
+    Overall, I think that in the current setting, I am starting to experience the
+    symptoms of a "manager brain": While I am still contributing individually to many
+    things, there simply isn't enough time to focus on any single task properly.
+    In the long term, this negatively impacts the quality of my work and my 
+    cognitive abilities.
+    </li>
+</ul>
+
+<h2 id="time-analysis">Time analysis</h2>
+<p>
+This semester includes ~15 work days "on vacation", because
+it covers large part of my summer holiday as well as Christmans. It
+also includes 4 national holidays and 4 sick days. As we'll see, this
+does not really affect the overall calculus that much though.
+</p>
+
+<h3 id="administration">Administration</h3>
+<p>It is quite complicated to classify specific tasks as
+“administrative”. My own classification mostly assumes that a task is
+administrative if the output is not a useful “deliverable” in the
+teaching or science categories.</p>
+
+<h4 id="teaching-faculty-administration">Teaching / faculty
+administration (~202h)</h4>
+<p>Administrative tasks include:</p>
+<ul>
+<li>(136h) “Emails” (see below)</li>
+<li>(20h) Various planning and overhead, including this report</li>
+<li>(17h) Administrative tasks (teaching agreements, travel reports, ...)</li>
+<li>(12h) Faculty-wide and department meetings</li>
+<li>(9h) “One-on-one” meetings; typically miscellaneous planning or
+consults</li>
+<li>(8h) Outreach (open days, lab day, ...)</li>
+</ul>
+<p><strong>Emails</strong> This includes reading and responding to
+emails and messages, as well as doing “quick tasks” triggered by a
+message. In particular, this includes a lot of administrative tasks
+that are not logged separately.
+Bottom line: strictly speaking, not all of this time is spent responding
+to emails, but it typically corresponds to time spent on communication
+and miscellaneous reporting.</p>
+<p>
+We can also quantify this. As discussed last time, I have a relatively
+good idea regarding how many "notifications" I get via email (those end
+up in the trash) and how many "conversations" I interact with (something
+that I do actually respond to). Compared to last semester, the number
+has increased slightly. <em>I generally delete 1000-1500 
+emails per month, and react to 300-350 conversations (worst months
+are closer to 450 though).</em> This also does not account for direct
+messages. Overall, this is consistent with the increase in time tracked
+in this category (last semester, it was 103h), where we estimated that
+each deleted notification email takes 2-3s to process, and each 
+conversation takes 3-4 minutes to resolve. However, I am suspecting the
+error bars are very large on this, so this is only a "napkin math" 
+estimate to figure out if this semester is an outlier.
+</p>
+
+<h4 id="research-group-administration">Research group administration
+(~165h)</h4>
+<p>These tasks mostly cover things related to infrastructure and
+administration within our research group. I’m not putting these in the
+“science” category because they do not contribute directly to
+specific papers/grants, but are nevertheless necessary to maintain
+our sceintific output.</p>
+<ul>
+<li>(42h) Maintaining lab "Biodivine" codebase</li>
+<li>(28h) Maintaining BBM model repository</li>
+<li>(28h) New low-level utility libraries for Biodivine</li>
+<li>(28h) Other infrastructure maintenance and experiments</li>
+<li>(20h) Social and planning meetings within the lab</li>
+<li>(15h) Lab seminar</li>
+<li>(13h) Lab related travel</li>
+</ul>
+<p>
+Compared to previous semester, this item has grown significantly,
+especially in terms of maintenance and coding. While not ideal, I
+believe these elements will effectively contribute towards better
+scientific output in the future, hence I don't mind this increase
+that much. Furthermore, these are usually tasks that are hard to 
+delegate, because they require disproportionate amount of onboarding. 
+Compared to last semester, the social and community aspect
+is a bit lower (something we definitely need to work on).
+</p>
+<h4 id="summary">Summary</h4>
+<p>Overall, I spent 367 hours performing administrative tasks and maintenance 
+compared to 170 “planned” hours (more than double). This is a major increase 
+compared to the last semester, but at least in the lab category, it should produce
+justifiable results. Emails and communication are a still a major category (~136h). 
+I don’t think this part can be significantly simplified without major
+changes in my duties.</p>
+
+<h3 id="teaching-and-advising">Teaching and advising</h3>
+<h4 id="advising-and-reviewing-bachelor-and-master-theses">Advising
+and reviewing bachelor and master theses (~134h)</h4>
+<p>
+I interacted with 16 students as thesis advisor or in some form of 
+consultant position. Out of those, 3 defended their thesis this semester.
+I also reviewed 4 other theses.</p>
+<p>I was the consultant for two PhD students. Ideally, I would count
+this as research, but our evaluation scheme considers this to be
+teaching, so I included it here :)</p>
+<ul>
+<li>(76h) Meetings and reviewing the work of students.</li>
+<li>(26h) Thesis related overhead, like topic materials (7h), defence (6h), and writing official reviews (13h).</li>
+<li>(32h) Meetings and material preparation for PhD students.</li>
+</ul>
+<p>
+Obviously, this was a significant portion of my teaching duties this semester,
+but is also significantly lower than last semester. Partially due to smaller
+number of students defending this semester, partially due to better time
+management, but also (likely) lower level of engagement on my part.
+</p>
+<h4 id="courses-and-teaching-materials">Courses and teaching
+materials (~265h)</h4>
+<p>In the spring semester, I was involved in the organization of the
+following courses:</p>
+<ul>
+<li>PV252 (Web Development), ~75 students, 3 seminar
+groups. I am the main lecturer and I also ran two seminar groups this semester.
+This course is also currently "under development", so it requires a lot of new
+materials.</li>
+<li>IB111 (Introduction to programming), ~20 students, 1 seminar
+group. I was running one seminar in this course, but I am otherwise not
+involved in its organization.</li>
+<li>PV247 (Modern Development of User Interfaces), ~50 students, 2
+seminar groups. I am the faculty member responsible for this course, but
+the actual materials are prepared and taught by external
+contractors.</li>
+<li>PV292 (App development in Flutter), ~70 students, 3
+seminar groups. I am the faculty member responsible for this course, but
+the actual materials are prepared and taught by external
+contractors.</li>
+</ul>
+<ul>
+<li><p>[IB111] (24h) Teaching at the IB111 seminar.</p></li>
+<li><p>[IB111] (15h) Reviewing student homework assignments and
+preparing discussion topics for the seminar.</p></li>
+<li><p>[PV252] (78h) Preparation of new materials (several new or 
+significantly updated lectures and seminars).</p></li>
+<li><p>[PV252] (56h) Teaching the UI segments in two seminar groups and
+most course-wide lectures.</p></li>
+<li><p>[PV252] (38h) Project grading, interviews and presentations.</p></li>
+<li><p>[PV252] (19h) Course administration (projects, assignments, planning, ...).</p></li>
+<li><p>[PV252] (16h) Homework assignment grading.</p></li>
+<li><p>(19h) Activities related to other courses (mostly preparation for
+the spring semester).</p></li>
+</ul>
+<p>Overall, this is more teaching than last semester, primarily due to material preparation.
+So hopefully, this should get easier next year.</p>
+<h4 id="summary-1">Summary</h4>
+<p>Overall, I spent 399 hours performing "teaching duties" compared to 340
+“planned” hours. This is less than the previous semester, but most of that
+time seems to have moved into "admin" tasks.</p>
+
+<h3 id="science">Science (~447h)</h3>
+<p>Here, task classification is also somewhat complicated, because we
+can split the tasks either by project, or by the type of activity
+(meeting/discussion, writing, coding/experiments, …). First, let’s list
+tasks that don’t belong to any specific “project”:</p>
+<ul>
+<li>(44h) Writing and refining a grant proposal.</li>
+<li>(35h) Attending the CMSB conference.</li>
+<li>(34h) Various exploratory experiments, learning new tools, ...</li>
+<li>(13h) Reviewing several large journal papers.</li>
+<li>(7h) Preparation of various talks.</li>
+</ul>
+<p>Now let’s list the other “project-oriented” tasks, with the caveat
+that some stuff is not published yet, so I’ll need to be a bit
+vague about it. Another issue is that for these, I often don’t have a
+clear distinction between meetings and focused work (plus some meetings 
+fall in the "consulting PhD students" category), so we will again
+need to accept some reasonable estimates. Also note that most of the
+larger projects span multiple semesters, so we can’t get a complete 
+“cost” of any project based on these numbers (we should be able to get
+some better numbers eventually, but that will take a few years).</p>
+<ul>
+<li>(90h) Main work on <a href="https://arxiv.org/abs/2602.15691" target="_blank">Relating biomarkers and phenotypes using dynamical trap spaces</a>. 20-30% spent in meetings, rest as primary contributor.</li>
+<li>(78h) Main work on <a href="https://arxiv.org/abs/2604.27576" target="_blank">BAss: Symbolic Reasoning in Abstract Dialectical Frameworks</a>. 10% spent in meetings, rest as primary contributor.</li>
+<li>(39h) “Upcoming project A”, meetings likely took <5%.</li>
+<li>(33h) Exploratory meetings and discussions with various other
+research groups.</li>
+<li>(26h) Kickstarting work on <a href="https://arxiv.org/abs/2604.07496" target="_blank">SMT with Uninterpreted Functions and Monotonicity...</a>. 30% spent in meetings, rest as initial prototyping.</li>
+<li>(18h) Wrapping up <a href="https://academic.oup.com/bioinformaticsadvances/article/6/1/vbag014/8436077" target="_blank">Sketchbook: logical model inference...</a>. 80% in meetings and reviews, almost no major contributions on my part.</li>
+<li>(11h) Revision of "Control-Guided Refinement of Partially Specified Boolean Networks" manuscript (to appear soon). Half meetings, half actual work.</li>
+<li>(10h) Preliminary work on "Upcoming project B"; 40% meetings.</li>
+<li>(7h) Preliminary work on "Upcoming project C"; 20% meetings.</li>
+<li>(2h) Preliminary work on "Upcoming project D".</li>
+</ul>
+<h4 id="summary-2">Summary</h4>
+<p>
+Note that some items (BBM repository) that I previously counted as research have now 
+moved to "admin", yet this category grew significantly compared to last semester,
+and is probably the main contributor towards my (lack of) work-life-balance.
+Nevertheless, the results do seem promising, so at least for now, it seems the
+effort is paying off. Also, as expected, projects with many collaborators have
+a lot of overhead, compared to smaller, more focused tasks.
+</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>
+First important observation is that last semester, my average work week had one 
+extra day (~48h instead of 40h). Now, it is 58h instead of 40h, so more than 
+two extra days. This may be somewhat influenced by the fall semester including
+most of summer, but is overall not a good trend (and I don't see a major improvement
+in spring 2026 so far). As such, next steps will definitely focus on trying to
+get this number into acceptable levels. However, another important observation 
+is that so far, the extra work is mostly paying of in terms of new publications
+and collaborations. Nevertheless, I still need to learn how to delegate better,
+and more importantly, find people that I can delegate to.
+
+</article>
+</div>
+</div>
+<!-- Just a spacer --> 
+<div style="height:100px;"></div>
+
+</body>
+
+</html> 
