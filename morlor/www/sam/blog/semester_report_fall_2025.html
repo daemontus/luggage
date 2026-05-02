@@ -181,7 +181,8 @@ also includes 4 national holidays and 4 sick days. As we'll see, this
 does not really affect the overall calculation that much, though.
 </p>
 
-<p>For anyone impatient, here is first a breakdown for this semester.</p>
+<p>For anyone impatient, here is first a breakdown for this semester. Comparison 
+with the previous semester is at the end of the article.</p>
 
 <!-- Chart Container -->
 <div class="uk-margin-large-top uk-margin-large-bottom">
@@ -320,7 +321,6 @@ does not really affect the overall calculation that much, though.
   var chart = new ApexCharts(document.querySelector("#treemap-chart"), options);
   chart.render();
 </script>
-
 
 <h3 id="administration">Administration</h3>
 <p>It is quite complicated to classify specific tasks as
@@ -516,6 +516,109 @@ is that so far, the extra work is mostly paying off in terms of new publications
 and collaborations. Nevertheless, I still need to learn how to delegate better,
 and more importantly, find people to whom I can delegate.
 </p>
+
+<!-- Chart Container -->
+<div class="uk-margin-large-top uk-margin-large-bottom">
+    <h3 class="uk-text-center">Semester-over-Semester: Time Spent by Category</h3>
+    <div id="comparison-chart"></div>
+</div>
+
+<!-- Chart Script -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+  var options = {
+    series: [
+      {
+        name: 'Spring 2025',
+        data:[76, 164, 260, 197, 150, 202] // Calculated from your Spring report
+      },
+      {
+        name: 'Fall 2025',
+        data:[174, 202, 134, 265, 166, 281] // Calculated from your Fall report
+      }
+    ],
+    chart: {
+      type: 'bar',
+      height: 500,
+      fontFamily: 'inherit',
+      toolbar: { show: false }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+        borderRadius: 3,
+        barHeight: '75%'
+      }
+    },
+    colors: ['#A0AEC0', '#2B6CB0'], // Soft Gray for Spring (Past), Bold Blue for Fall (Present)
+    dataLabels: {
+      enabled: true,
+      offsetX: 25, // Pushes the label slightly outside the bar
+      style: {
+        fontSize: '13px',
+        colors: ['#333']
+      },
+      formatter: function (val) {
+        return val + "h";
+      }
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['#fff']
+    },
+    xaxis: {
+      categories:[
+        'Admin: Lab Infrastructure', 
+        'Admin: General / Faculty', 
+        'Teaching: Students & Theses', 
+        'Teaching: Courses', 
+        'Science: Other Activity', 
+        'Science: Papers & Projects'
+      ],
+      title: {
+        text: 'Total Hours'
+      },
+      labels: {
+        formatter: function (val) {
+          return val + "h";
+        }
+      }
+    },
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: '14px',
+          fontWeight: 500
+        }
+      }
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: function (val) {
+          return val + " hours";
+        }
+      }
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'center',
+      fontSize: '15px',
+      markers: {
+        radius: 2
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#comparison-chart"), options);
+  chart.render();
+</script>
+
 </article>
 </div>
 </div>

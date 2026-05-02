@@ -135,6 +135,156 @@ estimates, and we’ll just have to accept that the fall semester will be
 a bit less productive overall.</em> Also, I was sick for 5 days, but it was
 nothing serious, so I am not really including this in the
 discussion.</p>
+
+<p>For anyone impatient, here is first a breakdown for this semester.</p>
+
+<!-- Chart Container -->
+<div class="uk-margin-large-top uk-margin-large-bottom">
+    <h3 class="uk-text-center">Visualized: Semester Time Breakdown</h3>
+    <div id="treemap-chart"></div>
+</div>
+
+<!-- Chart Script -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+  var options = {
+    series:[
+      // --- SCIENCE ---
+      {
+        name: 'Science: Papers & Projects',
+        data:[
+          { x: 'Upcoming Project A', y: 62.5 },
+          { x: 'Biodivine Boolean Models', y: 32.5 },
+          { x: 'Upcoming Project B', y: 29.5 },
+          { x: 'Trap Space Paper', y: 25.5 },
+          { x: 'Upcoming Project C', y: 22 },
+          { x: 'AEON 2025 Tool Paper', y: 16 },
+          { x: 'Motif-avoidant Attractors', y: 8 },
+          { x: 'Biobalm Paper', y: 6 }
+        ]
+      },
+      {
+        name: 'Science: Other Activity',
+        data:[
+          { x: 'Grant Proposal', y: 45.5 },
+          { x: 'SAT/CP Conference', y: 45 },
+          { x: 'Exploratory Meetings', y: 19.5 },
+          { x: 'Reviewing Papers', y: 19 },
+          { x: 'Erasmus Internship', y: 14 },
+          { x: 'Exploratory Exp.', y: 7 }
+        ]
+      },
+
+      // --- TEACHING & ADVISING ---
+      {
+        name: 'Teaching: Courses',
+        data:[
+          { x: 'PV239 Prep', y: 26 },
+          { x: 'PB111 Seminar', y: 24 },
+          { x: 'PV260 NetSuite Seminar', y: 24 },
+          { x: 'PV260 FI-MUNI Seminar', y: 22 },
+          { x: 'PV260 HW Reviews', y: 22 },
+          { x: 'PV239 Lectures', y: 22 },
+          { x: 'PV239 Seminars & Org', y: 16 },
+          { x: 'PB111 Prep & HW', y: 12.5 },
+          { x: 'PV260 Seminar Design', y: 8 },
+          { x: 'PV252 Planning', y: 7 },
+          { x: 'PV260 Prep & Meetings', y: 6.5 },
+          { x: 'PV239 Exams', y: 5 },
+          { x: 'PV260 Exams', y: 2 }
+        ]
+      },
+      {
+        name: 'Teaching: Students & Theses',
+        data:[
+          { x: 'Thesis Consults (Submitters)', y: 200 },
+          { x: 'Thesis Overhead / Reviews', y: 33 },
+          { x: 'Thesis Consults (Non-submit)', y: 13 },
+          { x: 'PhD Meetings', y: 11 },
+          { x: 'Thesis Writing Materials', y: 3 }
+        ]
+      },
+
+      // --- ADMINISTRATION ---
+      {
+        name: 'Admin: General / Faculty',
+        data:[
+          { x: 'Emails', y: 103 },
+          { x: 'State Exams / Defense', y: 24 },
+          { x: 'Faculty Meetings', y: 12.5 },
+          { x: 'Peer-to-Peer Meetings', y: 8.5 },
+          { x: 'Hiring Committee', y: 6 },
+          { x: 'Web Dev Coordination', y: 5 },
+          { x: 'Dept Meetings', y: 3 },
+          { x: 'Course Catalogue Updates', y: 2 }
+        ]
+      },
+      {
+        name: 'Admin: Lab Infrastructure',
+        data:[
+          { x: 'Lab Codebase', y: 16 },
+          { x: 'Lab Seminar', y: 14 },
+          { x: 'Bioinfo Retreat', y: 11.5 },
+          { x: 'External Group Meetings', y: 11 },
+          { x: 'Lab Social / Plenary', y: 10 },
+          { x: 'Lab Infrastructure', y: 7.5 },
+          { x: 'Project Planning Meetings', y: 6 }
+        ]
+      }
+    ],
+    legend: {
+      show: true,
+      position: 'top',
+      fontSize: '14px',
+      fontWeight: 'bold',
+      markers: {
+        radius: 2 
+      }
+    },
+    chart: {
+      height: 700, 
+      type: 'treemap',
+      fontFamily: 'inherit', 
+      toolbar: { show: false }
+    },
+    // 6 distinct colors identical to the Fall 2025 chart
+    colors:[
+      '#1E88E5', // Blue (Science: Papers & Projects)
+      '#8E24AA', // Purple (Science: Other Activity)
+      '#43A047', // Green (Teaching: Courses)
+      '#00ACC1', // Cyan (Teaching: Students & Theses)
+      '#E53935', // Red (Admin: General / Faculty)
+      '#FB8C00'  // Orange (Admin: Lab Infrastructure)
+    ], 
+    plotOptions: {
+      treemap: {
+        enableShades: true,
+        shadeIntensity: 0.2, 
+        distributed: false
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '13px',
+      },
+      formatter: function(text, op) {
+        return[text, op.value + 'h']
+      }
+    },
+    tooltip: {
+      y: {
+        formatter: function(value) {
+          return value + ' hours'
+        }
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#treemap-chart"), options);
+  chart.render();
+</script>
+
 <h3 id="administration">Administration</h3>
 <p>Note that it is quite complicated to classify specific tasks as
 “administrative”. My own classification mostly assumes that a task is
