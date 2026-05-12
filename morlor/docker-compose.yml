@@ -59,6 +59,7 @@ services:
       - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
     depends_on:
       - authelia
+      - synapse-db
     volumes:
       # For now, we will save everything to appdata; 
       # if it gets too big, we can always move it...
@@ -72,9 +73,7 @@ services:
       # .. or you may split this between different storage points
       # - ./files:/data
       # - /path/to/ssd:/data/uploads
-      # - /path/to/large_hdd:/data/media
-    depends_on:
-      - synapse-db
+      # - /path/to/large_hdd:/data/media    
     ports:
       - 8008:8008/tcp
     deploy:
