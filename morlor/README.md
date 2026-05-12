@@ -47,3 +47,15 @@ Right now, we don't really have an automated provisioning/setup script, because 
  7. Prepare configuration and user data in `/root/data/authelia`.
  8. Make sure to add `certificate_renew.sh` to `crontab` (see HTTPS section).
  9. Create authelia configuration and import user data per instructions above.
+
+ ## Useful notes
+
+ Update docker containers:
+
+ ```bash
+ cd /root/luggage/morlor
+ docker compose pull
+ docker compose up --force-recreate -d
+ ```
+
+ Afterwards, check that everything is running...
