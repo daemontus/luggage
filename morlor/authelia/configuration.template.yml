@@ -67,18 +67,20 @@ server:
     # csp_template: ''
 
   ## Server Buffers configuration.
-  # buffers:
+  buffers:
 
     ## Buffers usually should be configured to be the same value.
     ## Explanation at https://www.authelia.com/c/server#buffer-sizes
     ## Read buffer size adjusts the server's max incoming request size in bytes.
     ## Write buffer size does the same for outgoing responses.
 
+    # Buffer size increased to accommodate longer URLs in some apps (qbittorrent).
+
     ## Read buffer.
-    # read: 4096
+    read: 16384
 
     ## Write buffer.
-    # write: 4096
+    write: 16384
 
   ## Server Timeouts configuration.
   # timeouts:
