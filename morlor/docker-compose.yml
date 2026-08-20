@@ -70,6 +70,7 @@ services:
       - /root/data/matrix/mautrix-slack:/mautrix-slack
       - /root/data/matrix/mautrix-signal:/mautrix-signal
       - /root/data/matrix/mautrix-whatsapp:/mautrix-whatsapp
+      - /root/data/matrix/mautrix-googlechat:/mautrix-googlechat
       # .. or you may split this between different storage points
       # - ./files:/data
       # - /path/to/ssd:/data/uploads
@@ -185,6 +186,21 @@ services:
       - synapse-net
     volumes:
       - /root/data/matrix/mautrix-whatsapp:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+
+  mautrix-googlechat:
+    image: dock.mau.dev/mautrix/googlechat:latest
+    depends_on:
+      - synapse-db
+      - synapse
+    networks:
+      - synapse-net
+    volumes:
+      - /root/data/matrix/mautrix-googlechat:/data
     deploy:
       resources:
         limits:
