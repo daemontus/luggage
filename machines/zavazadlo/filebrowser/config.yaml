@@ -3,13 +3,28 @@ server:
   sources:
     - path: /srv/Media # Do not use a root "/" directory or include the "/var" folder
       config:
-        defaultEnabled: true
+        defaultPermissions:
+          view: true
+          download: true
+          modify: true      # enables rename/move/copy/delete of existing files
+          create: true      # enables upload/new folders
+          delete: true      # enables delete specifically
     - path: /srv/Archive
       config:
-        defaultEnabled: true
+        defaultPermissions:
+          view: true
+          download: true
+          modify: true      # enables rename/move/copy/delete of existing files
+          create: true      # enables upload/new folders
+          delete: true      # enables delete specifically
     - path: /srv/Personal
       config:
-        defaultEnabled: true
+        defaultPermissions:
+          view: true
+          download: true
+          modify: true      # enables rename/move/copy/delete of existing files
+          create: true      # enables upload/new folders
+          delete: true      # enables delete specifically
 auth:
   methods:
     oidc:
