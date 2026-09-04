@@ -2,18 +2,19 @@ services:
   # Icon:
   #   https://github.com/maschhoff/docker/raw/master/filebrowser/35781395.png
   services-file-browser:
-    image: filebrowser/filebrowser:latest
+    image: gtstef/filebrowser:beta
     restart: unless-stopped
     container_name: services-file-browser
     environment:
-      - FB_NOAUTH=noauth
+      # Has to be set in `.env`.
+      - FILEBROWSER_OIDC_CLIENT_SECRET=${FB_OIDC_SECRET}
     ports:
       - '10004:80'
     volumes:
       - /mnt/user/Media:/srv/Media
       - /mnt/user/Archive:/srv/Archive
       - /mnt/user/Personal:/srv/Personal
-      - /mnt/user/appdata/filebrowser/database.db:/db/database.db
+      - /mnt/user/appdata/filebrowser/data:/home/filebrowser/data
     deploy:
       resources:
         limits:
@@ -33,6 +34,7 @@ services:
       - UMASK=022
       - TZ=Etc/UTC
       - VERSION=docker
+      # Has to be set in `.env`.
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - /mnt/user/Media/Library/:/movies

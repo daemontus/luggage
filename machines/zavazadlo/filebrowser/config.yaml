@@ -1,0 +1,28 @@
+server:
+  cacheDir: /home/filebrowser/data/tmp # using the data volume so it can persist across restarts
+  sources:
+    - path: /srv/Media # Do not use a root "/" directory or include the "/var" folder
+      config:
+        defaultEnabled: true
+    - path: /srv/Archive
+      config:
+        defaultEnabled: true
+    - path: /srv/Personal
+      config:
+        defaultEnabled: true
+auth:
+  methods:
+    oidc:
+      enabled: true
+      clientId: filebrowser
+      issuerUrl: https://auth.unsigned-short.com
+      scopes: "openid email profile groups"
+      userIdentifier: preferred_username   # default
+      adminGroup: "admins"     # OIDC group that gets admin rights
+      # userGroups:                        # optional: restrict login to these groups
+      #   - "filebrowser-users"
+      groupsClaim: groups                  # default
+      logoutRedirectUrl: https://auth.unsigned-short.com/logout
+http:
+  #baseURL: "https://files.unsigned-short.com"
+  trustProxyHeaders: true
