@@ -31,10 +31,12 @@
 # at 3am:
 # 0 3 * * 0 root python3 /mnt/hdd/backups/zavazadlo.py >> /mnt/hdd/backups/zavazadlo.log 2>&1
 
+import fcntl
 import os
-import sys
 import smtplib
-from datetime import date, datetime
+import subprocess
+import sys
+from datetime import datetime
 from email.mime.text import MIMEText
 from pathlib import Path
 
@@ -49,108 +51,158 @@ LOCAL_BACKUP_DIR = '/mnt/hdd/backups/zavazadlo'
 SEND_REPORT_TO = 'daemontus@gmail.com'
 # Currently, only gmail senders are supported, but you can configure this quite easily.
 GMAIL_USER = 'daemontus@gmail.com'
-GMAIL_APP_PASSWORD = 'SECRET'
+# Don't keep the app password in the script. Provide it either through the
+# BACKUP_GMAIL_APP_PASSWORD environment variable, or put it in a file (chmod 600)
+# readable only by the user running the backup.
+GMAIL_APP_PASSWORD_FILE = '/root/.backup_gmail_app_password'
+
+# Fail instead of hanging forever when the remote machine is off or unreachable.
+SSH_OPTIONS = [
+	'-o', 'BatchMode=yes',
+	'-o', 'ConnectTimeout=30',
+	'-o', 'ServerAliveInterval=30',
+	'-o', 'ServerAliveCountMax=6',
+]
+# How many trailing lines of an rsync log to include in the report for failed locations.
+LOG_TAIL_LINES = 15
 
 
-def handle_error(message = None):
-	if message is None:
-		message = "Unknown backup error"
-	smtpserver = smtplib.SMTP('smtp.gmail.com', 587) # Server to use.
-	smtpserver.ehlo()
-	smtpserver.starttls()
-	smtpserver.ehlo()
-	smtpserver.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+def load_app_password():
+	password = os.environ.get('BACKUP_GMAIL_APP_PASSWORD')
+	if password:
+		return password
+	return Path(GMAIL_APP_PASSWORD_FILE).read_text().strip()
 
-	# Mailing info
-	# Account Information
-	today = date.today()  # Get current time/date
-	now = datetime.now() # Get current time
 
-	# Creates the text, subject, 'from', and 'to' of the message.
-	#msg = MIMEText('actual public IP: %s' %  public_ip)
-	msg = MIMEText(message)
-	msg['Subject'] = '!!! Backup error'
-	msg['From'] = GMAIL_USER
-	msg['To'] = SEND_REPORT_TO
-	# Send the message
-	smtpserver.sendmail(GMAIL_USER, [SEND_REPORT_TO], msg.as_string())
-	# Closes the smtp server.
-	smtpserver.quit()
+def send_report(subject, body):
+	"""Send an email report. Never raises: a mail failure must not hide the backup result."""
+	try:
+		msg = MIMEText(body)
+		msg['Subject'] = subject
+		msg['From'] = GMAIL_USER
+		msg['To'] = SEND_REPORT_TO
+		with smtplib.SMTP('smtp.gmail.com', 587, timeout=60) as smtp:
+			smtp.starttls()
+			smtp.login(GMAIL_USER, load_app_password())
+			smtp.send_message(msg)
+	except Exception as e:
+		print(f"Failed to send report email ({subject!r}): {e}", file=sys.stderr)
 
-def handle_success(locations, duration):	
-	smtpserver = smtplib.SMTP('smtp.gmail.com', 587) # Server to use.
-	smtpserver.ehlo()
-	smtpserver.starttls()
-	smtpserver.ehlo()
-	smtpserver.login(GMAIL_USER, GMAIL_APP_PASSWORD)
 
-	# Mailing info
-	# Account Information
-	today = date.today()  # Get current time/date
-	now = datetime.now() # Get current time
-
-	# Creates the text, subject, 'from', and 'to' of the message.
-	#msg = MIMEText('actual public IP: %s' %  public_ip)
-	msg = MIMEText(f"Backup job completed successfully in {duration}.\n\n{locations}")
-	msg['Subject'] = 'Backup success'
-	msg['From'] = GMAIL_USER
-	msg['To'] = SEND_REPORT_TO
-	# Send the message
-	smtpserver.sendmail(GMAIL_USER, [SEND_REPORT_TO], msg.as_string())
-	# Closes the smtp server.
-	smtpserver.quit()
-
-start_time = datetime.now()
-print("Starting backup at", start_time)
-
-status = os.system(f"scp \"{MACHINE_URL}:{REMOTE_LIST_FILE}\" \"{LOCAL_BACKUP_DIR}/backup-locations.txt\"")
-
-if status != 0:
-	handle_error("Failed to retrieve backup locations.")
+def fail(message):
+	print(f"ERROR: {message}", file=sys.stderr)
+	send_report('!!! Backup error', message)
 	sys.exit(1)
 
-results = ""
-backup_locations = Path(f"{LOCAL_BACKUP_DIR}/backup-locations.txt").read_text()
-for location in backup_locations.splitlines():
-	location = location.strip()
-	if location.startswith('#'):
-		results += f"[Skipped] {location}\n"
-		print(f"Skipping location `{location[1:]}`.")
-		continue
-	if not location.startswith('/'):
-		handle_error(f"Invalid `{location}`.")
-		sys.exit(2)
-	print(f"Synchronizing location {location}")
+
+def tail(path, lines=LOG_TAIL_LINES):
+	try:
+		return ''.join(Path(path).read_text(errors='replace').splitlines(keepends=True)[-lines:])
+	except OSError:
+		return '(log unavailable)\n'
+
+
+def sync_location(location, backup_dir):
+	"""Returns (rsync exit code, log path)."""
+	# For files, we don't do anything. For folders, we want the original
+	# path to end with /, but not the local one.
+	local_path = Path(f"{backup_dir}{location.rstrip('/') or '/'}")
+	local_path.mkdir(parents=True, exist_ok=True)
+	log_path = backup_dir / f"rsync_{location.replace('/', '_')}.log"
+
 	# -a means directory is processed recursively and permissions are preserved.
 	# -z means the transfer uses compression.
 	# -v is just verbose to print the list of transferred files.
 	# -W means "copy whole files", which avoids diffing, which is often costly for large files.
 	#    Typically, the file is either completely changed or very small anyway.
-	# --delete means files removed on remove machine are removed here too.	
-	# You can add -n to perform a dry run of the backup.	
-	local_path = f"{LOCAL_BACKUP_DIR}{location}"
-	# For files, we don't do anything. For folders, we want the original 
-	# path to ends with /, but not the local one.
-	if local_path.endswith('/'):
-		local_path = local_path[:-1]
-	location_id = location.replace('/', '_')
+	# -s (--protect-args) stops the remote shell from re-splitting paths with spaces/globs.
+	# --delete means files removed on remote machine are removed here too.
+	# You can add -n to perform a dry run of the backup.
+	command = [
+		'rsync', '-azvWs', '--delete',
+		'-e', 'ssh ' + ' '.join(SSH_OPTIONS),
+		f"{MACHINE_URL}:{location}", str(local_path),
+	]
+	with open(log_path, 'w') as log:
+		return subprocess.run(command, stdout=log, stderr=subprocess.STDOUT).returncode, log_path
 
-	status = os.system(f"mkdir -p {local_path}")
+
+def main():
+	backup_dir = Path(LOCAL_BACKUP_DIR)
+	backup_dir.mkdir(parents=True, exist_ok=True)
+
+	# Prevent overlapping runs (e.g. last week's backup still going) from
+	# running rsync --delete over the same directories concurrently.
+	lock_file = open(backup_dir / '.backup.lock', 'w')
+	try:
+		fcntl.flock(lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
+	except OSError:
+		fail("Another backup run is still in progress.")
+
+	start_time = datetime.now()
+	print("Starting backup at", start_time)
+
+	list_path = backup_dir / 'backup-locations.txt'
+	# subprocess.run with an argument list: no shell, so no quoting problems.
+	status = subprocess.run(
+		['scp', '-q', *SSH_OPTIONS, f"{MACHINE_URL}:{REMOTE_LIST_FILE}", str(list_path)]
+	).returncode
 	if status != 0:
-		handle_error(f"Cannot create target dir for {location}")
-		sys.exit(2)
-	
-	status = os.system(f"rsync -azvW --delete \"{MACHINE_URL}:{location}\" \"{local_path}\" &> \"{LOCAL_BACKUP_DIR}/rsync_{location_id}.log\"")
-	if status == 0:
-		results += f"{status} [OK] {location}\n"	
-	elif status == 23:
-		results += f"{status} [PARTIAL] {location}\n"
-	else:
-		results += f"{status} [ERR] {location}\n"
+		fail(f"Failed to retrieve backup locations (scp exit code {status}).")
 
-end_time = datetime.now()
-duration = end_time - start_time
-print("Backup completed at:", end_time)
-print("Total duration:", duration)
+	results = []
+	failures = 0
+	for location in list_path.read_text().splitlines():
+		location = location.strip()
+		if not location:
+			continue
+		if location.startswith('#'):
+			results.append(f"[Skipped] {location}")
+			print(f"Skipping location `{location[1:].strip()}`.")
+			continue
+		if not location.startswith('/') or '..' in location.split('/'):
+			# A bad line should not prevent the other locations from being backed up.
+			results.append(f"[INVALID] {location}")
+			failures += 1
+			continue
 
-handle_success(results, duration)
+		print(f"Synchronizing location {location}")
+		try:
+			# Note: os.system() returned a wait status (exit code << 8), so the
+			# old `status == 23` check could never match. subprocess gives the real code.
+			status, log_path = sync_location(location, backup_dir)
+		except Exception as e:
+			results.append(f"[ERR] {location}: {e}")
+			failures += 1
+			continue
+
+		if status == 0:
+			results.append(f"[OK] {location}")
+		elif status in (23, 24):
+			# 23 = partial transfer (some files unreadable), 24 = files vanished during transfer.
+			results.append(f"[PARTIAL] ({status}) {location}\n{tail(log_path)}")
+			failures += 1
+		else:
+			results.append(f"[ERR] ({status}) {location}\n{tail(log_path)}")
+			failures += 1
+
+	duration = datetime.now() - start_time
+	print("Backup completed at:", datetime.now())
+	print("Total duration:", duration)
+
+	report = '\n'.join(results)
+	if failures:
+		send_report('!!! Backup finished with errors',
+			f"Backup job finished in {duration} with {failures} problem(s).\n\n{report}")
+		sys.exit(3)
+	send_report('Backup success', f"Backup job completed successfully in {duration}.\n\n{report}")
+
+
+if __name__ == '__main__':
+	try:
+		main()
+	except SystemExit:
+		raise
+	except Exception as e:
+		# Make sure an unexpected crash is also reported instead of dying silently in the cron log.
+		fail(f"Backup crashed: {e!r}")
